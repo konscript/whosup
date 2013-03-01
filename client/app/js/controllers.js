@@ -3,7 +3,7 @@
 /* Controllers */
 
 function BalancesCtrl($scope, Transactions) {
-     $scope.transactions = Transactions.getItems();
+     $scope.transactions = Transactions.query();
 }
 //BalancesCtrl.$inject = ['Transactions'];
 
