@@ -36,5 +36,44 @@
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+
+  <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '191611900970322', // App ID
+          //channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : false  // parse XFBML
+        });
+
+        FB.login(function(response) {
+            console.log(response);
+           if (response.authResponse) {
+             console.log('Welcome!  Fetching your information.... ');
+             FB.api('/me', function(response) {
+               console.log('Good to see you, ' + response.name + '.');
+             });
+             // load all of the dependencies asynchronously.
+             angular.bootstrap(document, ['socialmoney']);
+           } else {
+             console.log('User cancelled login or did not fully authorize.');
+           }
+         }, {scope: 'email,manage_friendlists,read_friendlists,publish_checkins'});
+    };
+
+    // Load the SDK's source Asynchronously
+    // Note that the debug version is being actively developed and might
+    // contain some type checks that are overly strict.
+    // Please report such bugs using the bugs tool.
+    (function(d, debug){
+       var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement('script'); js.id = id; js.async = true;
+       js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+       ref.parentNode.insertBefore(js, ref);
+     }(document, /*debug*/ false));
+  </script>
+
 </body>
 </html>
