@@ -1280,13 +1280,13 @@ td {
 /* Default Link Styles */
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_type\.scss}line{font-family:\00003145}}
 a {
-  color: #00d08e;
+  color: #3e3e3e;
   text-decoration: none;
   line-height: inherit;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_type\.scss}line{font-family:\00003151}}
 a:hover, a:focus {
-  color: #00b67d;
+  color: #313131;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_type\.scss}line{font-family:\00003153}}
 a img {
@@ -1691,13 +1691,13 @@ blockquote p {
   padding-bottom: 0.8125em;
   padding-left: 1.5em;
   font-size: 1em;
-  background-color: #00d08e;
-  border-color: #009d6b;
+  background-color: #3e3e3e;
+  border-color: #252525;
   color: white;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_buttons\.scss}line{font-family:\00003112}}
 .button:hover, .button:focus {
-  background-color: #009d6b;
+  background-color: #252525;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_buttons\.scss}line{font-family:\00003123}}
 .button:hover, .button:focus {
@@ -1789,8 +1789,8 @@ blockquote p {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_buttons\.scss}line{font-family:\00003176}}
 .button.disabled, .button[disabled] {
-  background-color: #00d08e;
-  border-color: #009d6b;
+  background-color: #3e3e3e;
+  border-color: #252525;
   color: white;
   cursor: default;
   opacity: 0.6;
@@ -1799,7 +1799,7 @@ blockquote p {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_buttons\.scss}line{font-family:\00003112}}
 .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-  background-color: #009d6b;
+  background-color: #252525;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_buttons\.scss}line{font-family:\00003123}}
 .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
@@ -1807,7 +1807,7 @@ blockquote p {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_buttons\.scss}line{font-family:\00003134}}
 .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-  background-color: #00d08e;
+  background-color: #3e3e3e;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_buttons\.scss}line{font-family:\00003177}}
 .button.disabled.secondary, .button[disabled].secondary {
@@ -2639,7 +2639,7 @@ form.custom .custom.disabled {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_split-buttons\.scss}line{font-family:\0000378}}
 .split.button span {
-  border-left-color: #00845a;
+  border-left-color: #181818;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_split-buttons\.scss}line{font-family:\00003111}}
 .split.button span {
@@ -3098,12 +3098,12 @@ form.custom .custom.disabled {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_top-bar\.scss}line{font-family:\00003219}}
 .top-bar-section ul li > a.button {
-  background: #00d08e;
+  background: #3e3e3e;
   font-size: 0.8125em;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_top-bar\.scss}line{font-family:\00003222}}
 .top-bar-section ul li > a.button:hover {
-  background: #009d6b;
+  background: #252525;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_top-bar\.scss}line{font-family:\00003226}}
 .top-bar-section ul li > a.button.secondary {
@@ -4053,8 +4053,8 @@ form.custom .custom.disabled {
   position: relative;
   padding: 0.6875em 1.3125em 0.75em 0.6875em;
   font-size: 0.875em;
-  background-color: #00d08e;
-  border-color: #009d6b;
+  background-color: #3e3e3e;
+  border-color: #252525;
   color: white;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_alert-boxes\.scss}line{font-family:\0000396}}
@@ -4132,7 +4132,7 @@ form.custom .custom.disabled {
   font-size: 0.6875em;
   padding-left: 0.75em;
   text-transform: uppercase;
-  color: #00d08e;
+  color: #3e3e3e;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_breadcrumbs\.scss}line{font-family:\0000371}}
 .breadcrumbs li.current a {
@@ -4199,7 +4199,7 @@ kbd {
   position: relative;
   padding: 0.1875em 0.625em 0.25em;
   font-size: 0.875em;
-  background-color: #00d08e;
+  background-color: #3e3e3e;
   color: #fff;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_labels\.scss}line{font-family:\0000373}}
@@ -4286,14 +4286,14 @@ kbd {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_pagination\.scss}line{font-family:\0000369}}
 .pagination li.current a {
-  background: #00d08e;
+  background: #3e3e3e;
   color: white;
   font-weight: bold;
   cursor: default;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_pagination\.scss}line{font-family:\0000376}}
 .pagination li.current a:hover, .pagination li.current a:focus {
-  background: #00d08e;
+  background: #3e3e3e;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_pagination\.scss}line{font-family:\0000382}}
@@ -4341,10 +4341,10 @@ kbd {
 .panel.callout {
   border-style: solid;
   border-width: 1px;
-  border-color: #009d6b;
+  border-color: #252525;
   margin-bottom: 1.25em;
   padding: 1.25em;
-  background: #00d08e;
+  background: #3e3e3e;
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
 }
@@ -4443,7 +4443,7 @@ kbd {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_progress-bars\.scss}line{font-family:\0000351}}
 .progress .meter {
-  background: #00d08e;
+  background: #3e3e3e;
   height: 100%;
   display: block;
 }
@@ -4503,7 +4503,7 @@ kbd {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_side-nav\.scss}line{font-family:\0000342}}
 .side-nav li a {
   display: block;
-  color: #00d08e;
+  color: #3e3e3e;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_side-nav\.scss}line{font-family:\0000347}}
 .side-nav li.active a {
@@ -4552,7 +4552,7 @@ kbd {
   -webkit-border-radius: 1000px;
   border-radius: 1000px;
   font-weight: bold;
-  background: #00d08e;
+  background: #3e3e3e;
   padding: 0.1875em 0.5625em;
   cursor: default;
   color: white;
@@ -4858,8 +4858,8 @@ table tfoot tr td {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_thumbs\.scss}line{font-family:\0000328}}
 .th:hover, .th:focus {
-  -webkit-box-shadow: 0 0 6px 1px rgba(0, 208, 142, 0.5);
-  box-shadow: 0 0 6px 1px rgba(0, 208, 142, 0.5);
+  -webkit-box-shadow: 0 0 6px 1px rgba(62, 62, 62, 0.5);
+  box-shadow: 0 0 6px 1px rgba(62, 62, 62, 0.5);
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_thumbs\.scss}line{font-family:\0000340}}
 .th.radius {
@@ -4877,8 +4877,8 @@ table tfoot tr td {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_tooltips\.scss}line{font-family:\0000334}}
 .has-tip:hover, .has-tip:focus {
-  border-bottom: dotted 1px #006a48;
-  color: #00d08e;
+  border-bottom: dotted 1px #0b0b0b;
+  color: #3e3e3e;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_tooltips\.scss}line{font-family:\0000340}}
 .has-tip.tip-left, .has-tip.tip-right {
@@ -4912,8 +4912,8 @@ table tfoot tr td {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_tooltips\.scss}line{font-family:\0000367}}
 .tooltip.opened {
-  color: #00d08e !important;
-  border-bottom: dotted 1px #006a48 !important;
+  color: #3e3e3e !important;
+  border-bottom: dotted 1px #0b0b0b !important;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.9\.1\/gems\/zurb-foundation-4\.0\.3\/scss\/foundation\/components\/_tooltips\.scss}line{font-family:\0000372}}
 .tooltip.radius {
@@ -5101,4 +5101,9 @@ header .header-balance {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000365}}
 .button.tight {
   margin: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000369}}
+.add-form input {
+  margin-bottom: 0;
 }
