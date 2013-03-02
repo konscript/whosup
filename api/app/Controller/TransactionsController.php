@@ -15,6 +15,23 @@ class TransactionsController extends AppController {
         ));
     }
 
+    public function getAllByUser($id){
+		$this->loadModel('User');
+		$this->loadModel('Subtransaction');
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user id'));
+		}
+
+		$this->Transaction->recursive = 2;
+		$options = array('conditions' => array('Transaction.created_by' => $id));
+		$transactions = $this->Transaction->find('all',$options);
+
+        $this->set(array(
+            'transactions' => $transactions,
+            '_serialize' => array('transactions')
+        ));
+    }
+
 	public function view($id = null) {
 		if (!$this->Transaction->exists($id)) {
 			throw new NotFoundException(__('Invalid transaction'));
@@ -177,4 +194,4 @@ class TransactionsController extends AppController {
 // 		$this->Session->setFlash(__('Transaction was not deleted'));
 // 		$this->redirect(array('action' => 'index'));
 // 	}
-// }
+}
