@@ -1,7 +1,8 @@
 <form novalidate class="simple-form" ng-model="transaction">
-    <input type="hidden" ng-model="transaction.facebook_id" id="facebook_id" />
-    <label>Name:</label><input type="text" ng-model="transaction.title" autocomplete selected="selectedUid" list="availableTags" />
-    <label>Amount:</label><input type="number" ng-model="transaction.total_amount" />
+    <div class="row padded">
+        <input type="text" ng-model="transaction.title" placeholder="Give it a name" class="small-6 columns" autocomplete selected="selectedUid" list="availableTags" />
+        <input type="number" ng-model="transaction.total_amount" placeholder="How much was it?" class="small-6 columns" />
+    </div>
 </form>
-<br />
-<button ng-click="newTransaction(transaction)" class="button expand"><i class="icon-plus-sign"></i>Create Transaction!</button>
+
+<button ng-click="newTransaction(transaction)" class="button expand"><i class="icon-plus-sign"></i>Add it!</button>
