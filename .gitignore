@@ -7,6 +7,8 @@ build.xml
 .settings
 .idea/*
 
+.sass-cache
+
 /api/app/Config/core.php
 /api/app/Config/database.php
 /api/lib/Cake/Console/Templates/skel/tmp/
