@@ -1,24 +1,35 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="WhosUp">
 <head>
   <meta charset="utf-8">
   <title>My AngularJS App</title>
   <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="lib/bootstrap/assets/bootstrap.css"/>
+  <link rel="stylesheet" href="lib/bootstrap/assets/bootstrap-responsive.css"/>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
 
-  <div ng-view></div>
+  <div role="main">
 
-  <div>Angular seed app: v<span app-version></span></div>
+    <h1>Who's Up</h1>
+
+    <ul class="nav nav-tabs">
+      <li><a href="#/index">Overview</a></li>
+      <li><a href="#/new">New</a></li>
+    </ul>
+
+    <div ng-view></div>
+
+    <hr />
+    <div>WHOS UP: v<span app-version></span></div>
+
+  </div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
   -->
   <script src="lib/angular/angular.js"></script>
+  <script src="lib/bootstrap/ui-bootstrap-tpls-0.1.0.js" type="text/javascript"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>

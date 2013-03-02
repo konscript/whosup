@@ -2,11 +2,17 @@
 
 /* Controllers */
 
-
-function MyCtrl1() {}
-MyCtrl1.$inject = [];
-
-
-function MyCtrl2() {
+function BalancesCtrl($scope, Transactions) {
+    $scope.balances = Transactions.getItems();
 }
-MyCtrl2.$inject = [];
+//BalancesCtrl.$inject = ['Transactions'];
+
+function NewCtrl($scope, Transactions) {
+    $scope.newTransaction = function() {
+        Transactions.addItem({
+            name: 'John',
+            balance: -200
+        });
+    };
+}
+//NewCtrl.$inject = ['Transactions'];
