@@ -13,11 +13,7 @@ app.factory('Transactions', function($resource) {
     };
 
     Transactions.getItems = function() {
-        console.log("getItems()");
-        var transactions = Transactions.get(function() {
-            console.log("Fetched from backend");
-            return transactions["transactions"];
-        });
+        return Transactions.query();
     };
     Transactions.addItem = function(item) { list.push(item); };
     Transactions.removeItem = function(item) { list.splice(list.indexOf(item), 1); };

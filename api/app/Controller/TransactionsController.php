@@ -11,7 +11,7 @@ class TransactionsController extends AppController {
         $transactions = $this->Transaction->find('all');
         $this->set(array(
             'transactions' => $transactions,
-            '_serialize' => array('transactions')
+            '_serialize' => 'transactions'
         ));
     }
 
