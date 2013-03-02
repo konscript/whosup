@@ -1,5 +1,5 @@
 <form novalidate class="simple-form" ng-model="transaction">
-    <label>Name:</label><input type="text" ng-model="transaction.title" />
+    <label>Name:</label><input type="text" ng-model="transaction.title" autocomplete selected="selectedUid" list="availableTags" />
     <label>Amount:</label><input type="number" ng-model="transaction.total_amount" />
 </form>
 <br />
