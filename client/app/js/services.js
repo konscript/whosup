@@ -3,23 +3,44 @@
 /* Services */
 
 app.factory('Transactions', function($resource) {
-    var Transactions = $resource('/whosup/api/transactions.json');
-    var Transaction = $resource('/whosup/api/transactions/:transaction_id.json');
+    return $resource(
+        "/whosup/api/transactions/:listController:id/:itemController",
+        {
+            id: "@id",
+            listController: "@listController",
+            itemController: "@itemController"
+        },
+        {
+            clear: {
+                method: "POST",
+                params: {
+                    listController: "clear-all"
+                }
+            }
+        }
+    );
+});
 
-    Transactions.getItem = function(index) {
-        var transaction = Transaction.get({transaction_id: index}, function() {
-            return transaction;
-        });
-    };
+app.factory('Balances', function($resource) {
+    return $resource(
+        "/whosup/api/balances/:listController:id/:itemController",
+        {
+            id: "@id",
+            listController: "@listController",
+            itemController: "@itemController"
+        }
+    );
+});
 
-    Transactions.getItems = function() {
-        return Transactions.query();
-    };
-    Transactions.addItem = function(item) { list.push(item); };
-    Transactions.removeItem = function(item) { list.splice(list.indexOf(item), 1); };
-    Transactions.size = function() { return list.length; };
-
-    return Transactions;
+app.factory('Users', function($resource) {
+    return $resource(
+        "/whosup/api/users/:listController:id/:itemController",
+        {
+            id: "@id",
+            listController: "@listController",
+            itemController: "@itemController"
+        }
+    );
 });
 
 // Demonstrate how to register services
