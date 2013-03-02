@@ -43,6 +43,9 @@
 // @import "foundation/components/tooltips";
 // @import "foundation/components/dropdown";
 
+
+// Global
+
 header {
     padding: 0.5em 0;
     border-bottom: 1px solid #ccc;
@@ -66,6 +69,48 @@ header {
     margin: 0;
 }
 
-.add-form input {
-    margin-bottom: 0;
+// New View
+
+.add-form {
+}
+
+.user-thumbnail {
+    width: 30px;
+    height: 30px;
+    background-image: url('/whosup/client/app/img/user-thumbnail-default.png');
+    background-size: 30px 30px;
+}
+
+.subtransactionusers-table {
+
+}
+
+
+// jQuery UI styling
+
+.ui-helper-hidden-accessible { display: none; }
+
+.ui-autocomplete {
+    background: #F3F3F3;
+    border: 1px solid #ccc;
+    list-style-type: none;
+
+    .ui-menu-item {
+        display: list-item;
+        overflow: hidden;
+
+        a {
+            display: block;
+            clear: both;
+            float: left;
+            font-size: 0.875em;
+
+            &.ui-state-focus, &.ui-state-active {
+                font-weight: bold;
+            }
+
+            img { display: block; float: left; }
+            span { display: block; float: left; line-height:30px; margin-left: 10px; }
+        }
+    }
 }
