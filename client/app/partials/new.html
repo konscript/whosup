@@ -1,4 +1,6 @@
-<label>Name:</label><input type="text" />
-<label>Amount:</label><input type="number" />
+<form novalidate class="simple-form" ng-model="transaction">
+    <label>Name:</label><input type="text" ng-model="transaction.title" />
+    <label>Amount:</label><input type="number" ng-model="transaction.total_amount" />
+</form>
 <br />
-<button ng-click="newTransaction()" class="btn"><i class="icon-plus-sign"></i>Create Transaction!</button>
+<button ng-click="newTransaction(transaction)" class="btn"><i class="icon-plus-sign"></i>Create Transaction!</button>
