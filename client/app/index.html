@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="WhosUp">
+<html lang="en" ng-app="whosUp">
 <head>
   <meta charset="utf-8">
   <title>My AngularJS App</title>
@@ -29,7 +29,8 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
   -->
   <script src="lib/angular/angular.js"></script>
-  <script src="lib/angular/angular-resource.js" type="text/javascript"
+  <script src="lib/jquery-1.9.1.min.js" type="text/javascript"></script>
+  <script src="lib/angular/angular-resource.js" type="text/javascript"></script>
   <script src="lib/bootstrap/ui-bootstrap-tpls-0.1.0.js" type="text/javascript"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
@@ -37,7 +38,9 @@
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
 
-  <script>
+  <script type="text/javascript">
+      console.log("WTF");
+
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '191611900970322', // App ID
@@ -48,19 +51,17 @@
         });
 
         FB.login(function(response) {
-            console.log(response);
-           if (response.authResponse) {
-             console.log('Welcome!  Fetching your information.... ');
-             FB.api('/me', function(response) {
-               console.log('Good to see you, ' + response.name + '.');
-             });
-             // load all of the dependencies asynchronously.
-             angular.bootstrap(document, ['socialmoney']);
-           } else {
-             console.log('User cancelled login or did not fully authorize.');
-           }
-         }, {scope: 'email,manage_friendlists,read_friendlists,publish_checkins'});
-    };
+          console.log(response);
+          if (response.authResponse) {
+            FB.api('/me', function(response) {
+              console.log(response);
+              console.log('Good to see you, ' + response.name + '.');
+           });
+         } else {
+            console.log('User cancelled login or did not fully authorize.');
+         }
+       }, {scope: 'email,manage_friendlists,read_friendlists,publish_checkins'});
+  };
 
     // Load the SDK's source Asynchronously
     // Note that the debug version is being actively developed and might

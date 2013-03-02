@@ -2,7 +2,8 @@
 
 /* Services */
 
-app.factory('Transactions', function($resource) {
+angular.module('whosUp.services', [])
+.factory('Transactions', function($resource) {
     return $resource(
         "/whosup/api/transactions/:listController:id/:itemController",
         {
@@ -19,9 +20,8 @@ app.factory('Transactions', function($resource) {
             }
         }
     );
-});
-
-app.factory('Balances', function($resource) {
+})
+.factory('Balances', function($resource) {
     return $resource(
         "/whosup/api/balances/:listController:id/:itemController",
         {
@@ -30,9 +30,8 @@ app.factory('Balances', function($resource) {
             itemController: "@itemController"
         }
     );
-});
-
-app.factory('Users', function($resource) {
+})
+.factory('Users', function($resource) {
     return $resource(
         "/whosup/api/users/:listController:id/:itemController",
         {
@@ -42,7 +41,3 @@ app.factory('Users', function($resource) {
         }
     );
 });
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('WhosUp.services', []).value('version', '0.1');

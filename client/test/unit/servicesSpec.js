@@ -3,7 +3,7 @@
 /* jasmine specs for services go here */
 
 describe('service', function() {
-  beforeEach(module('WhosUp.services'));
+  beforeEach(module('whosUp.services'));
 
 
   describe('version', function() {
