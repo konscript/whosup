@@ -3,7 +3,7 @@
 /* jasmine specs for filters go here */
 
 describe('filter', function() {
-  beforeEach(module('WhosUp.filters'));
+  beforeEach(module('whosUp.filters'));
 
 
   describe('interpolate', function() {

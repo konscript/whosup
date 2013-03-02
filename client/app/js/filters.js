@@ -2,7 +2,7 @@
 
 /* Filters */
 
-angular.module('WhosUp.filters', []).
+angular.module('whosUp.filters', []).
   filter('interpolate', ['version', function(version) {
     return function(text) {
       return String(text).replace(/\%VERSION\%/mg, version);
