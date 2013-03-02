@@ -1,10 +1,17 @@
 Pitch
-====================
+--------------------
 
 Making money lending and owes easy since 2013
 
+Requirements
+--------------------
+
+Fucking nice LAMP stack
+Nice fucking browser
+A nicely fucked mood
+
 Setup
-====================
+--------------------
 
 1) Setup LAMP stack: https://help.ubuntu.com/community/ApacheMySQLPHP
 2) Create /api/app/Config/database.php and core.php from defaults.
