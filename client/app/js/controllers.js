@@ -5,7 +5,6 @@
 function BalancesCtrl($scope, Transactions) {
      $scope.transactions = Transactions.query();
 }
-//BalancesCtrl.$inject = ['Transactions'];
 
 function NewCtrl($scope, $location, Transactions) {
     $scope.newTransaction = function(transaction) {
@@ -13,4 +12,3 @@ function NewCtrl($scope, $location, Transactions) {
         $location.path( "/main" );
     };
 }
-//NewCtrl.$inject = ['Transactions'];
