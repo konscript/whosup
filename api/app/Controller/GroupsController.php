@@ -71,6 +71,21 @@ class GroupsController extends AppController {
         ));
 	}
 
+
+	/**
+	* Get balances by group id
+	*
+	*/
+	public function balances($id){
+		$this->loadModel('GroupBalance');
+		$balances = $this->GroupBalance->getBalanceByGroupId($id);
+
+		$this->set(array(
+            'balances' => $balances,
+            '_serialize' => array('balances')
+        ));
+	}
+
 // /**
 //  * index method
 //  *
