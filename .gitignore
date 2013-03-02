@@ -1,0 +1,9 @@
+/api/app/Config
+/api/app/tmp
+/api/lib/Cake/Console/Templates/skel/tmp/
+/api/plugins
+/api/vendors
+/api/build
+/api/dist
+/api/tags
+.DS_Store
