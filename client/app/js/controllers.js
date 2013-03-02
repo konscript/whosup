@@ -5,7 +5,6 @@
 function BalancesCtrl($scope, Transactions) {
      $scope.transactions = Transactions.query();
 }
-//BalancesCtrl.$inject = ['Transactions'];
 
 function NewCtrl($scope, $location, Transactions, facebookConnect) {
     $scope.availableTags = [];
@@ -26,4 +25,3 @@ function NewCtrl($scope, $location, Transactions, facebookConnect) {
         $location.path( "/main" );
     };
 }
-//NewCtrl.$inject = ['Transactions'];

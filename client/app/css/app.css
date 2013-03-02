@@ -5094,6 +5094,11 @@ header .header-balance {
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000361}}
+.padded {
+  padding: 10px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000365}}
 .button.tight {
   margin: 0;
 }
