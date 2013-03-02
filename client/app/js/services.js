@@ -2,25 +2,26 @@
 
 /* Services */
 
-app.factory('Transactions', function() {
+app.factory('Transactions', function($resource) {
+    var Transactions = $resource('/whosup/api/transactions.json');
+    var Transaction = $resource('/whosup/api/transactions/:transaction_id.json');
 
-    var Transactions = {};
-    var list = [{
-        name: 'Visti',
-        balance: -300
-    }, {
-        name: 'Mikkel',
-        balance: -200
-    }, {
-        name: 'Jakob',
-        balance: -400
-    }];
+    Transactions.getItem = function(index) {
+        var transaction = Transaction.get({transaction_id: index}, function() {
+            return transaction;
+        });
+    };
 
-    Transactions.getItem = function(index) { return list[index]; }
-    Transactions.getItems = function() { return list; }
-    Transactions.addItem = function(item) { list.push(item); }
-    Transactions.removeItem = function(item) { list.splice(list.indexOf(item), 1) }
-    Transactions.size = function() { return list.length; }
+    Transactions.getItems = function() {
+        console.log("getItems()");
+        var transactions = Transactions.get(function() {
+            console.log("Fetched from backend");
+            return transactions["transactions"];
+        });
+    };
+    Transactions.addItem = function(item) { list.push(item); };
+    Transactions.removeItem = function(item) { list.splice(list.indexOf(item), 1); };
+    Transactions.size = function() { return list.length; };
 
     return Transactions;
 });
