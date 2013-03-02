@@ -71,6 +71,25 @@ class UsersController extends AppController {
         ));
 	}
 
+    public function delete($id = null) {
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+
+        $this->request->onlyAllow('post', 'delete');
+        if ($this->User->delete()) {
+            $success = true;
+        }else {
+            $success = false;
+        }
+
+        $this->set(array(
+            'success' => $success,
+            '_serialize' => array('success')
+        ));
+    }
+
 // /**
 //  * view method
 //  *
@@ -86,12 +105,10 @@ class UsersController extends AppController {
 // 		$this->set('user', $this->User->find('first', $options));
 // 	}
 
-/**
- * index method
- *
- * @return void
- */
-
+// *
+//  * index method
+//  *
+//  * @return void
 // public function index() {
 // 	$this->User->recursive = 0;
 // 	$this->set('users', $this->paginate());
