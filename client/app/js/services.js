@@ -76,13 +76,17 @@ angular.module('whosUp.services', [])
         };
 
         facebookConnectService.getFriends = function(callback) {
-            FB.api('/me/friends', {}, function(response) {
-                if (!response || response.error) {
-                    console.log("Error");
-                } else {
-                    callback(response);
-                }
-            });
+            if(self.friends){
+                callback(self.friends);
+            }else{
+                FB.api('/me/friends', {}, function(response) {
+                    if (!response || response.error) {
+                        console.log("Error");
+                    } else {
+                        callback(response);
+                    }
+                });
+            }
         };
 
         facebookConnectService.getFriend = function(friend_id, callback) {

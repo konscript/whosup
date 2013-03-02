@@ -18,7 +18,8 @@ angular.module('whosUp.directives', [])
                         return false;
                     },
                     select:function (event, ui) {
-                        scope.selectedUid = ui.item.value;
+                        scope.selectedUid = ui.item.label;
+                        scope.facebookUi = ui.item.value;
                         scope.$apply;
                         return true;
                     },
@@ -28,9 +29,8 @@ angular.module('whosUp.directives', [])
                         }
                     }
                 }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-                    return $( "<li>" )
-                    .append( "<a>" + item.label + "<br>" + item.value + "</a>" )
-                    .appendTo( ul );
+                    var image_url = "http://graph.facebook.com/" + item.value + "/picture";
+                    return $('<li></li>').data("item.autocomplete", item).append($("<img>").attr('src', image_url)).append('<a>' + item.label + '</a>').appendTo(ul);
                 };
             });
         }
