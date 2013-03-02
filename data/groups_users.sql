@@ -1,19 +1,101 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<!-- saved from url=(0039)http://www.generatedata.com/process.php -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<style type="text/css">
-body { margin: 10px; }
-body, table, th, td { font-family: arial; font-size: 8pt; }
-#resultTable { background-color: #efefef; border: 2px solid #dddddd; width: 100%; }
-#resultTable th { background-color: #efefef; }
-#resultTable td { background-color: #ffffff; }
-</style>
-
-<style type="text/css"></style></head>
-<body>
-
-INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('98','80');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('23','73');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('17','18');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('44','14');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('87','27');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('21','22');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('58','99');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('62','76');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('7','55');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('85','41');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('11','77');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('79','14');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('83','6');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('22','72');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('41','42');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('51','39');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('21','73');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('11','38');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('90','54');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('51','77');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('80','72');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('99','37');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('70','60');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('13','76');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('15','97');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('17','26');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('74','95');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('39','57');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('100','60');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('29','41');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('1','79');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('80','22');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('51','91');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('59','41');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('44','9');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('17','24');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('81','15');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('61','50');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('75','74');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('26','89');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('70','42');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('15','44');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('37','53');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('100','37');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('13','28');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('77','13');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('6','57');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('35','57');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('47','93');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('97','91');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('2','13');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('15','82');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('28','75');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('31','3');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('48','57');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('92','18');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('98','6');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('61','34');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('59','61');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('70','71');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('89','47');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('84','94');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('4','18');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('50','50');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('10','47');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('41','12');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('60','55');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('93','88');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('30','24');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('90','77');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('80','82');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('95','77');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('88','56');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('11','46');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('16','81');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('16','4');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('27','100');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('98','31');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('17','48');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('80','27');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('95','21');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('39','54');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('75','31');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('41','5');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('54','31');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('82','33');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('12','76');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('10','99');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('32','20');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('44','47');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('1','60');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('51','27');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('60','49');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('58','77');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('97','37');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('4','91');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('58','42');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('44','33');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('72','85');<br>INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('37','26');<br>
-
-
-</body></html>
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('98','80');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('23','73');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('17','18');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('44','14');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('87','27');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('21','22');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('58','99');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('62','76');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('7','55');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('85','41');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('11','77');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('79','14');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('83','6');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('22','72');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('41','42');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('51','39');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('21','73');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('11','38');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('90','54');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('51','77');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('80','72');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('99','37');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('70','60');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('13','76');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('15','97');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('17','26');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('74','95');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('39','57');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('100','60');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('29','41');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('1','79');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('80','22');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('51','91');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('59','41');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('44','9');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('17','24');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('81','15');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('61','50');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('75','74');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('26','89');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('70','42');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('15','44');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('37','53');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('100','37');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('13','28');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('77','13');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('6','57');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('35','57');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('47','93');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('97','91');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('2','13');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('15','82');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('28','75');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('31','3');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('48','57');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('92','18');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('98','6');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('61','34');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('59','61');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('70','71');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('89','47');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('84','94');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('4','18');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('50','50');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('10','47');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('41','12');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('60','55');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('93','88');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('30','24');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('90','77');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('80','82');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('95','77');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('88','56');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('11','46');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('16','81');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('16','4');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('27','100');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('98','31');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('17','48');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('80','27');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('95','21');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('39','54');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('75','31');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('41','5');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('54','31');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('82','33');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('12','76');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('10','99');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('32','20');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('44','47');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('1','60');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('51','27');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('60','49');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('58','77');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('97','37');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('4','91');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('58','42');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('44','33');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('72','85');
+INSERT INTO `groups_users` (`group_id`,`user_id`) VALUES ('37','26');
