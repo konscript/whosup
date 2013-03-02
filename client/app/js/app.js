@@ -6,3 +6,7 @@ var app = angular.module('whosUp', ['whosUp.filters', 'whosUp.services', 'whosUp
     $routeProvider.when('/new', {templateUrl: 'partials/new.html', controller: NewCtrl});
     $routeProvider.otherwise({redirectTo: '/index'});
 }]);
+
+app.run(function($rootScope, facebookConnect) {
+  $rootScope.facebookConnect = facebookConnect;
+});

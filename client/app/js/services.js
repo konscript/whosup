@@ -40,4 +40,58 @@ angular.module('whosUp.services', [])
             itemController: "@itemController"
         }
     );
+})
+.factory('facebookConnect', function() {
+        var facebookConnectService = {};
+        var self = this;
+        this.auth = null;
+
+        facebookConnectService.getAuth = function(){
+            return self.auth;
+        };
+
+
+        facebookConnectService.logout = function(callback) {
+            FB.logout(function(response) {
+              if (response) {
+                self.auth = null;
+              } else {
+                console.log('Facebook logout failed.', response);
+              }
+            });
+        };
+
+        facebookConnectService.login = function(callback) {
+            FB.login(function(response) {
+              if (response.authResponse) {
+                self.auth = response.authResponse;
+                if(callback){
+                    callback(response);
+                }
+
+              } else {
+                console.log('Facebook login failed', response);
+              }
+            });
+        };
+
+        facebookConnectService.getFriends = function(callback) {
+            FB.api('/me/friends', {}, function(response) {
+                if (!response || response.error) {
+                    console.log("Error");
+                } else {
+                    callback(response);
+                }
+            });
+        };
+
+        facebookConnectService.getFriend = function(friend_id, callback) {
+            if(self.auth){
+                FB.api('/' + friend_id, function(response) {
+                    callback(response);
+                });
+            }
+        };
+
+        return facebookConnectService;
 });
