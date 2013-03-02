@@ -5,8 +5,8 @@ App::uses('AppModel', 'Model');
  *
  */
 class GroupBalance extends AppModel {
-	
-	public $actsAs = array('Containable');
+
+	var $recursive = 2;
 
 	public $belongsTo = array(
 		'User' => array(
@@ -15,11 +15,18 @@ class GroupBalance extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Group' => array(
+			'className' => 'Group',
+			'foreignKey' => 'group_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 
 	function getBalanceByUserId($user_id){
-		$balances = $this->find('all',array(
+		$balances = $this->find('all', array(
 				'conditions' => array('GroupBalance.user_id' => $user_id),
 				'group' => array('GroupBalance.group_id'),
 				'fields' => array('sum(GroupBalance.balance) as balance','GroupBalance.group_id')
@@ -27,37 +34,31 @@ class GroupBalance extends AppModel {
 
 		$output = array();
 		foreach ($balances as $balance){
-			// debug($balance);
+			unset($balance['Group']['User']);
+
 			$output[] = array(
 				'balance' => $balance[0]['balance'],
-				'group_id' => $balance['GroupBalance']['group_id']
-				);
+				'group' => $balance["Group"]
+			);
 		}
 
 		return $output;
 	}
 
 	function getBalanceByGroupId($group_id){
-		// "SELECT user_id, SUM( balance ) AS balance
-		// 	FROM  `group_balances`
-		// 	WHERE group_id =$group_id
-		// 	GROUP BY user_id");
-		$this->recursive = 2;
-		$balances = $this->find('all',array(
-				'conditions' => array('GroupBalance.group_id' => $group_id),
-				'group' => array('GroupBalance.user_id'),
-				'fields' => array('sum(GroupBalance.balance) as balance','GroupBalance.user_id'),
-				// 'contain' => array('User')
+		$balances = $this->find('all', array(
+			'conditions' => array('GroupBalance.group_id' => $group_id),
+			'group' => array('GroupBalance.user_id'),
+			'fields' => array('sum(GroupBalance.balance) as balance','GroupBalance.user_id')
 		));
 
 		$output = array();
 		foreach ($balances as $balance){
-			// debug($balance);
 			unset($balance['User']['SubtransactionPayer']);
 			unset($balance['User']['SubtransactionBorrower']);
 
 			$output[] = array(
-				'balance' => $balance[0]['balance'], 
+				'balance' => $balance[0]['balance'],
 				'user' => $balance['User'],
 			);
 		}
