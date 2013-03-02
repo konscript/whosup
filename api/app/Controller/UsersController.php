@@ -89,4 +89,15 @@ class UsersController extends AppController {
             '_serialize' => array('success')
         ));
     }
+
+    public function balances($id){
+        $this->loadModel('GroupBalance');
+        $balances = $this->GroupBalance->getBalanceByUserId($id);
+
+        $this->set(array(
+            'balances' => $balances,
+            '_serialize' => array('balances')
+        ));
+    }
+
 }
