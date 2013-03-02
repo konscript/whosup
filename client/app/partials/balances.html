@@ -1,6 +1,6 @@
 <table>
-    <tr ng-repeat="balance in balances">
-        <td>{{ balance.name }}</td>
-        <td>{{ balance.balance }}</td>
+    <tr ng-repeat="transaction in transactions">
+        <td>{{ transaction.Transaction.title }}</td>
+        <td>{{ transaction.Transaction.total_amount }}</td>
     </tr>
 </table>
