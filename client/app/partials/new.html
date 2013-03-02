@@ -1,6 +1,6 @@
 <form novalidate class="simple-form" ng-model="transaction">
     <div class="row padded">
-        <input type="text" ng-model="transaction.title" placeholder="Give it a name" class="small-6 columns" />
+        <input type="text" ng-model="transaction.title" placeholder="Give it a name" class="small-6 columns" autocomplete selected="selectedUid" list="availableTags" />
         <input type="number" ng-model="transaction.total_amount" placeholder="How much was it?" class="small-6 columns" />
     </div>
 </form>
