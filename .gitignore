@@ -1,3 +1,12 @@
+**/.DS_Store
+nbproject
+manifest.mf
+build.xml
+
+.project
+.settings
+.idea/*
+
 /api/app/Config/core.php
 /api/app/Config/database.php
 /api/lib/Cake/Console/Templates/skel/tmp/
@@ -6,4 +15,3 @@
 /api/build
 /api/dist
 /api/tags
-.DS_Store
