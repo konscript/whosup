@@ -43,7 +43,7 @@
  *  Make cake restful
  */
     //Router::parseExtensions('json');
-    Router::mapResources('users');
+    Router::mapResources(array('users','groups','transactions','subtransactions'));
     Router::parseExtensions();
 
 
