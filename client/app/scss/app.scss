@@ -43,3 +43,21 @@
 // @import "foundation/components/tooltips";
 // @import "foundation/components/dropdown";
 
+header {
+    padding: 0.5em 0;
+    border-bottom: 1px solid #ccc;
+    background: #F3F3F3;
+
+    .header-logo img {
+        height: 43px;
+    }
+
+    .header-balance {
+        text-align: right;
+        padding: 7px 0;
+    }
+}
+
+.button.tight {
+    margin: 0;
+}

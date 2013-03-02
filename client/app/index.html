@@ -9,21 +9,15 @@
 
   <div role="main">
 
-    <header>
-      <div class="header-logo"></div>
-      <div class="button">New Transaction</div>
-      <div class="header-balance">Current balance: -300</div>
+    <header class="row">
+      <a href="#/overview" class="header-logo small-4 columns">
+        <img src="/whosup/client/app/img/logo.png" alt="Whos Up" title="Whos Up"/>
+      </a>
+      <a href="#/new" class="button tight small-4 columns">New</a>
+      <div class="header-balance small-4 columns">Balance:<br />-300</div>
     </header>
 
-    <ul class="nav nav-tabs">
-      <li><a href="#/index">Overview</a></li>
-      <li><a href="#/new">New</a></li>
-    </ul>
-
     <div ng-view></div>
-
-    <hr />
-    <div>v<span app-version></span></div>
 
   </div>
 
