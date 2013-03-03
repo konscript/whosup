@@ -10,9 +10,9 @@
                 <td><img src="http://graph.facebook.com/{{ subTransaction.value }}/picture" ng-show="subTransaction.value" class="user-thumbnail"/></td>
                 <td>{{ subTransaction.label }}</td>
                 <td>
-                    <input type="hidden" ng-model="subTransaction.id" value="{{ subTransaction.value }}" />
-                    <input type="hidden" ng-model="subTransaction.name" value="{{ subTransaction.label }}" />
-                    <input type="number" ng-model="subTransaction.amount" placeholder="Amount?" />
+                    <input type="hidden" ng-model="subTransaction.value" value="{{ subTransaction.value }}" />
+                    <input type="hidden" ng-model="subTransaction.label" value="{{ subTransaction.label }}" />
+                    <input type="number" ng-model="subTransaction.amount" ng-change="updateAmount()" placeholder="Amount?" />
                 </td>
                 <td>
                     <button class="button small" ng-click="removeSubTransaction(subTransaction.value)"><i class="foundicon-remove"></i></button>
