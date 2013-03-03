@@ -91,6 +91,15 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
         }
     });
 
+    $scope.updateAmount = function(){
+        $scope.transaction.total_amount = 0;
+
+        $.each($scope.transaction.subTransactions, function(index, subTransaction) {
+            $scope.transaction.total_amount += subTransaction.amount;
+        });
+
+    };
+
     $scope.newTransaction = function(transactions) {
         Transactions.save(transactions);
         $location.path( "/main" );

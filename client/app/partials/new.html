@@ -12,7 +12,7 @@
                 <td>
                     <input type="hidden" ng-model="subTransaction.id" value="{{ subTransaction.value }}" />
                     <input type="hidden" ng-model="subTransaction.name" value="{{ subTransaction.label }}" />
-                    <input type="number" ng-model="subTransaction.amount" placeholder="Amount?" />
+                    <input type="number" ng-model="subTransaction.amount" ng-change="updateAmount()" placeholder="Amount?" />
                 </td>
             </tr>
         </table>
