@@ -29,9 +29,6 @@ class UsersController extends AppController {
 
 
 	public function add() {
-		// avoid overwriting existing
-		unset($this->request->data["id"]);
-
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
@@ -51,9 +48,12 @@ class UsersController extends AppController {
 	}
 
 	public function edit($id = null) {
+
+        // if the user doesn't exist, create it
 		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
+            $this->User->create();
 		}
+
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->User->save($this->request->data)) {
 				$success = true;
@@ -97,6 +97,14 @@ class UsersController extends AppController {
         $this->set(array(
             'balances' => $balances,
             '_serialize' => array('balances')
+        ));
+    }
+
+    public function totalBalance($id){
+       $total_balance = $this->User->getTotalBalance($id);
+        $this->set(array(
+            'total_balance' => $total_balance,
+            '_serialize' => array('total_balance')
         ));
     }
 

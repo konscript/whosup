@@ -8,9 +8,9 @@ class User extends AppModel {
     var $displayField = 'first_name';
 
     public $validate = array(
-        'first_name' => 'alphaNumeric',
-        'last_name' => 'alphaNumeric',
-        'email' => 'email'
+        // 'first_name' => 'alphaNumeric',
+        // 'last_name' => 'alphaNumeric',
+        // 'email' => 'email'
         // 'email' => array(
         //     'email' => array(
         //         'rule'     => 'email',
@@ -48,5 +48,16 @@ class User extends AppModel {
             'counterQuery' => ''
         )
     );
+
+    function getTotalBalance($id){
+        // $this->loadModel('BalanceUnion');
+        $this->BalanceUnion = ClassRegistry::init('BalanceUnion');
+        $total = $this->BalanceUnion->find('first', array(
+            'conditions' => array('BalanceUnion.payer_id' => $id),
+            'fields' => array('sum(BalanceUnion.balance) as balance')
+        ));
+        $total = $total[0]['balance'];//['total_balance'][0]['balance'];
+        return $total;
+    }
 
 }

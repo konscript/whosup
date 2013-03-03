@@ -91,9 +91,7 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
         }
     });
 
-
     $scope.newTransaction = function(transactions) {
-        console.log(transactions);
         Transactions.save(transactions);
         $location.path( "/main" );
     };
