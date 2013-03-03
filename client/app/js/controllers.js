@@ -42,17 +42,17 @@ function GroupBalancesCtrl($scope, $routeParams, GroupBalances) {
      });
 }
 
-function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect) {
-
-
+function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect, Groups) {
     $scope.availableUsers = [];
-    $scope.selectedUid;
 
     $scope.transaction = {
         title: "",
         total_amount: "",
+        group_id: "",
         subTransactions: []
     };
+
+    $scope.groups = Groups.query();
 
     $rootScope.$watch("facebookInit", function(fbReady){
         if(fbReady){
@@ -70,7 +70,6 @@ function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect) {
 
 
     $scope.newTransaction = function(transactions) {
-        console.log(transactions);
         Transactions.save(transactions);
         $location.path( "/main" );
     };

@@ -51,6 +51,16 @@ angular.module('whosUp.services', [])
         }
     );
 })
+.factory('Groups', function($resource) {
+    return $resource(
+        "/whosup/api/groups/:listController:id/:itemController",
+        {
+            id: "@id",
+            listController: "@listController",
+            itemController: "@itemController"
+        }
+    );
+})
 .factory('facebookConnect', function() {
         var facebookConnectService = {};
         var self = this;
