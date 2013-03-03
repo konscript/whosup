@@ -4,13 +4,13 @@
         <input type="number" ng-model="transaction.total_amount" placeholder="How much was it?" class="small-6 columns" />
         <input type="text" placeholder="Who should be included?" class="small-12 columns" autocomplete list="availableUsers" />
         <table class="row small-12 columns subtransactionusers-table">
-            <tr ng-repeat="subTransactionUser in subTransactionUsers">
-                <td><img src="http://graph.facebook.com/{{ subTransactionUser.value }}/picture" ng-show="subTransactionUser.value" class="user-thumbnail"/></td>
-                <td>{{ subTransactionUser.label }}</td>
+            <tr ng-repeat="subTransaction in transaction.subTransactions">
+                <td><img src="http://graph.facebook.com/{{ subTransaction.value }}/picture" ng-show="subTransaction.value" class="user-thumbnail"/></td>
+                <td>{{ subTransaction.label }}</td>
                 <td>
-                    <input type="hidden" ng-model="transaction.subTransactions[subTransactionUser.value].id" value="{{ subTransactionUser.value }}" />
-                    <input type="hidden" ng-model="transaction.subTransactions[subTransactionUser.value].name" value="{{ subTransactionUser.label }}" />
-                    <input type="number" ng-model="transaction.subTransactions[subTransactionUser.value].amount" placeholder="Amount?" />
+                    <input type="hidden" ng-model="subTransaction.id" value="{{ subTransaction.value }}" />
+                    <input type="hidden" ng-model="subTransaction.name" value="{{ subTransaction.label }}" />
+                    <input type="number" ng-model="subTransaction.amount" placeholder="Amount?" />
                 </td>
             </tr>
         </table>

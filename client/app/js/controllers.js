@@ -18,8 +18,6 @@ function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect) {
         subTransactions: []
     };
 
-    $scope.subTransactionUsers = [];
-
     $rootScope.$watch("facebookInit", function(fbReady){
         if(fbReady){
             facebookConnect.getFriends(function(tokens){
