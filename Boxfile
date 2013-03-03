@@ -1,7 +1,15 @@
 web1:
   name: wp-web
   shared_writable_dirs:
-    - api/app/tmp/
+    - api/app/tmp/logs
+    - api/app/tmp/cache
+    - api/app/tmp/sessions
+    - api/app/tmp/tests
+  php_extensions:
+    - mcrypt
+    - mysqli
+    - mbstring
+    - pdo_mysql
   after_build:
     - "mv pagoda/database.php api/app/Config/database.php"
     - "mv pagoda/core.php api/app/Config/core.php"
