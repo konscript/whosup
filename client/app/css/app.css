@@ -5124,64 +5124,75 @@ header .header-balance {
   background-size: 30px 30px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003102}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000394}}
+.subtransactionusers-table {
+  padding: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000398}}
+.remove-subtransaction {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003107}}
 .balances-table .amount {
   text-align: right;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003107}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003112}}
 .amount-minus {
   color: red;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003111}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003116}}
 .amount-plus {
   color: green;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003115}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003120}}
 .amount-zero {
   color: orange;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003119}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003124}}
 .is-up-next {
   text-align: right;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003125}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003130}}
 .ui-helper-hidden-accessible {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003127}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003132}}
 .ui-autocomplete {
   background: #F3F3F3;
   border: 1px solid #cccccc;
   list-style-type: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003132}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003137}}
 .ui-autocomplete .ui-menu-item {
   display: list-item;
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003136}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003141}}
 .ui-autocomplete .ui-menu-item a {
   display: block;
   clear: both;
   float: left;
   font-size: 0.875em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003142}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003147}}
 .ui-autocomplete .ui-menu-item a.ui-state-focus, .ui-autocomplete .ui-menu-item a.ui-state-active {
   font-weight: bold;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003146}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003151}}
 .ui-autocomplete .ui-menu-item a img {
   display: block;
   float: left;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003147}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003152}}
 .ui-autocomplete .ui-menu-item a span {
   display: block;
   float: left;
@@ -5197,7 +5208,7 @@ header .header-balance {
   font-style: normal;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003166}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003171}}
 [class*="foundicon-"] {
   display: inline;
   width: auto;
@@ -5209,7 +5220,7 @@ header .header-balance {
   background-repeat: repeat;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003177}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003182}}
 [class*="foundicon-"]:before {
   font-family: "generalFoundicons";
   font-weight: normal;
