@@ -61,10 +61,10 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
     // new transaction for a group
     if ($routeParams.groupController !== undefined) {
 
-        $scope.transaction.group_id = $routeParams.groupController.id;
+        $scope.transaction.group_id = $routeParams.id;
 
-        Groups.get({listController: "getUsers", itemController: $routeParams.groupController.id},function(data){
-            $.each(data, function(index, value) {
+        Groups.get({listController: "getUsers", id: $routeParams.id},function(data){
+            $.each(data.users, function(index, value) {
                 $scope.transaction.subTransactions.push({
                     value: value.id,
                     label: value.first_name + ' ' + value.last_name
