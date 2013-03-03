@@ -56,6 +56,7 @@ angular.module('whosUp.services', [])
         var self = this;
         this.auth = null;
 
+
         facebookConnectService.getAuth = function(){
             return self.auth;
         };
@@ -78,10 +79,10 @@ angular.module('whosUp.services', [])
             FB.login(function(response) {
               if (response.authResponse) {
                 self.auth = response.authResponse;
+                console.log(self.auth);
                 if(callback){
                     callback(response);
                 }
-
               } else {
                 console.log('Facebook login failed', response);
               }
