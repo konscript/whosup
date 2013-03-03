@@ -2,6 +2,7 @@ web1:
   name: wp-web
   shared_writable_dirs:
     - api/app/tmp/logs
+    - api/app/tmp/cache/persistent/
     - api/app/tmp/cache
     - api/app/tmp/sessions
     - api/app/tmp/tests
