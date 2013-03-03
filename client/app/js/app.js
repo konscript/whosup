@@ -10,6 +10,7 @@ var app = angular.module('whosUp', ['whosUp.filters', 'whosUp.services', 'whosUp
 
 app.run(function($rootScope, Users) {
     $rootScope.facebookInit = false;
+    $rootScope.userBalance = 0;
     window.fbAsyncInit = function() {
         FB.init({
           appId      : '191611900970322', // App ID
@@ -25,6 +26,23 @@ app.run(function($rootScope, Users) {
             // post user obj to backend
             FB.api('/me', function(user) {
               Users.save(user);
+
+              Users.get({listController:'totalBalance', itemController:user.id}, function(data){
+
+                // iterate through and set class whether balance is in minus or plus
+                if (data.total_balance > 0) {
+                    data.klass = "amount-plus";
+                } else if (data.total_balance === 0) {
+                    data.klass = "amount-zero";
+                } else {
+                    data.klass = "amount-minus";
+                }
+
+                $rootScope.userBalance = data.total_balance;
+                $rootScope.userBalanceClass = data.klass;
+                $rootScope.$apply();
+              });
+
             });
 
             // fbReady to true
