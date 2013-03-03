@@ -14,6 +14,9 @@
                     <input type="hidden" ng-model="subTransaction.name" value="{{ subTransaction.label }}" />
                     <input type="number" ng-model="subTransaction.amount" placeholder="Amount?" />
                 </td>
+                <td>
+                    <button class="button small" ng-click="removeSubTransaction(subTransaction.value)"><i class="foundicon-remove"></i></button>
+                </td>
             </tr>
         </table>
     </div>
