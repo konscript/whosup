@@ -77,11 +77,16 @@ header {
 // New View
 
 .add-form {
+  .amount-input {
+    width: 60px;
+  }
 }
 
 .user-thumbnail {
     width: 30px;
     height: 30px;
+    min-width: 30px;
+    min-height: 30px;
     background-image: url('/whosup/client/app/img/user-thumbnail-default.png');
     background-size: 30px 30px;
 }
