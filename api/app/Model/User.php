@@ -49,6 +49,24 @@ class User extends AppModel {
         )
     );
 
+    public $hasAndBelongsToMany = array(
+        'Group' => array(
+            'className' => 'Group',
+            'joinTable' => 'groups_users',
+            'foreignKey' => 'user_id',
+            'associationForeignKey' => 'group_id',
+            'unique' => 'keepExisting',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'finderQuery' => '',
+            'deleteQuery' => '',
+            'insertQuery' => ''
+        )
+    );
+
     function getTotalBalance($id){
         // $this->loadModel('BalanceUnion');
         $this->BalanceUnion = ClassRegistry::init('BalanceUnion');
