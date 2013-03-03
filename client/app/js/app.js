@@ -1,5 +1,3 @@
-'use strict';
-
 // Declare app level module which depends on filters, and services
 var app = angular.module('whosUp', ['whosUp.filters', 'whosUp.services', 'whosUp.directives', 'ngResource']).config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/balances', {templateUrl: 'partials/balances.html', controller: BalancesCtrl});
@@ -8,7 +6,7 @@ var app = angular.module('whosUp', ['whosUp.filters', 'whosUp.services', 'whosUp
     $routeProvider.otherwise({redirectTo: '/balances'});
 }]);
 
-app.run(function($rootScope) {
+app.run(function($rootScope, Users) {
     $rootScope.facebookInit = false;
     window.fbAsyncInit = function() {
         FB.init({
@@ -28,6 +26,9 @@ app.run(function($rootScope) {
            });
             $rootScope.facebookInit = true;
             $rootScope.$apply();
+
+            // post user obj to backend
+            Users.save(response);
          } else {
             console.log('User cancelled login or did not fully authorize.');
          }
