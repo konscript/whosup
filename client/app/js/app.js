@@ -1,4 +1,4 @@
-// Declare app level module which depends on filters, and services
+  // Declare app level module which depends on filters, and services
 var app = angular.module('whosUp', ['whosUp.filters', 'whosUp.services', 'whosUp.directives', 'ngResource']).config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/balances', {templateUrl: 'partials/balances.html', controller: BalancesCtrl});
     $routeProvider.when('/group-balances/:id', {templateUrl: 'partials/group-balances.html', controller: GroupBalancesCtrl});
@@ -18,17 +18,16 @@ app.run(function($rootScope, Users) {
         });
 
         FB.login(function(response) {
-          console.log(response);
           if (response.authResponse) {
-            FB.api('/me', function(response) {
-              console.log(response);
-              console.log('Good to see you, ' + response.name + '.');
-           });
-            $rootScope.facebookInit = true;
-            $rootScope.$apply();
 
             // post user obj to backend
-            Users.save(response);
+            FB.api('/me', function(user) {
+              Users.save(user);
+            });
+
+            // fbReady to true
+            $rootScope.facebookInit = true;
+            $rootScope.$apply();
          } else {
             console.log('User cancelled login or did not fully authorize.');
          }

@@ -8,9 +8,9 @@ class User extends AppModel {
     var $displayField = 'first_name';
 
     public $validate = array(
-        'first_name' => 'alphaNumeric',
-        'last_name' => 'alphaNumeric',
-        'email' => 'email'
+        // 'first_name' => 'alphaNumeric',
+        // 'last_name' => 'alphaNumeric',
+        // 'email' => 'email'
         // 'email' => array(
         //     'email' => array(
         //         'rule'     => 'email',
