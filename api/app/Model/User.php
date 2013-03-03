@@ -49,4 +49,15 @@ class User extends AppModel {
         )
     );
 
+    function getTotalBalance($id){
+        // $this->loadModel('BalanceUnion');
+        $this->BalanceUnion = ClassRegistry::init('BalanceUnion');
+        $total = $this->BalanceUnion->find('first', array(
+            'conditions' => array('BalanceUnion.payer_id' => $id),
+            'fields' => array('sum(BalanceUnion.balance) as balance')
+        ));
+        $total = $total[0]['balance'];//['total_balance'][0]['balance'];
+        return $total;
+    }
+
 }

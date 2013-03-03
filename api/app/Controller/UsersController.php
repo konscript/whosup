@@ -100,4 +100,12 @@ class UsersController extends AppController {
         ));
     }
 
+    public function totalBalance($id){
+       $total_balance = $this->User->getTotalBalance($id);
+        $this->set(array(
+            'total_balance' => $total_balance,
+            '_serialize' => array('total_balance')
+        ));
+    }
+
 }
