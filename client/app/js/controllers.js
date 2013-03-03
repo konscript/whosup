@@ -9,7 +9,7 @@ function BalancesCtrl($scope, $rootScope, UserBalances, facebookConnect) {
         if(fbReady){
             facebookConnect.me(function(facebookUser){
 
-                 UserBalances.get({id: facebookUser.id}, function(data){
+                 UserBalances.get({id: 1}, function(data){
                     // iterate through and set class whether balance is in minus or plus
                     $.each(data.balances, function(index, value) {
                         if (value.balance > 0) {
