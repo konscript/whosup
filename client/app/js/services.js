@@ -66,13 +66,14 @@ angular.module('whosUp.services', [])
         var self = this;
         this.auth = null;
 
-
         facebookConnectService.getAuth = function(){
             return self.auth;
         };
 
-        facebookConnectService.me = function(){
-            return self.auth.authResponse.userID;
+        facebookConnectService.me = function(callback){
+            FB.api('/me', function(response) {
+                callback(response);
+            });
         };
 
         facebookConnectService.logout = function(callback) {
