@@ -94,14 +94,14 @@ class TransactionsController extends AppController {
 
 			}
 			// Save a transaction to own your self!
-			// $this->Subtransaction->create();
-			// $data = array();
-			// $data['payer_id'] = $payer_id;
-			// $data['borrower_id'] = $payer_id;
-			// $data['amount'] = $total_amount - $running_amount;
-			// $data['transaction_id'] = $this->Transaction->id;
-			// $data['accepted'] = 1;
-			// $this->Subtransaction->save($data);
+			$this->Subtransaction->create();
+			$data = array();
+			$data['payer_id'] = $payer_id;
+			$data['borrower_id'] = $payer_id;
+			$data['amount'] = $total_amount - $running_amount;
+			$data['transaction_id'] = $this->Transaction->id;
+			$data['accepted'] = 1;
+			$this->Subtransaction->save($data);
 
 
 			$invalidFields = $this->Transaction->invalidFields();
