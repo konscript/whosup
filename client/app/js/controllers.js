@@ -63,7 +63,7 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
 
         $scope.transaction.group_id = $routeParams.id;
 
-        Groups.get({listController: "getUsers", id: $routeParams.id},function(data){
+        Groups.get({listController: "getUsers", itemController: $routeParams.id},function(data){
             $.each(data.users, function(index, value) {
                 $scope.transaction.subTransactions.push({
                     value: value.id,
@@ -103,5 +103,13 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
     $scope.newTransaction = function(transactions) {
         Transactions.save(transactions);
         $location.path( "/main" );
+    };
+
+    $scope.removeSubTransaction = function(userId) {
+        $.each($scope.transaction.subTransactions, function(index, subTransaction){
+            if (subTransaction.value === userId) {
+                $scope.transaction.subTransactions.splice(index, 1);
+            }
+        });
     };
 }
