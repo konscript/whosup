@@ -80,13 +80,21 @@ class GroupsController extends AppController {
 	public function balances($id){
 		$this->loadModel('GroupBalance');
 		$balances = $this->GroupBalance->getBalanceByGroupId($id);
-
+		$hiscore = 0;
+		$whosup = array(); 
+		foreach ($balances as $b){
+			if ($b['balance'] < $hiscore){
+				$whosup = $b['user'];
+				$hiscore = $b['balance']; 
+			}
+		}
 		$group = $this->Group->findById($id);
 
 		$this->set(array(
             'balances' => $balances,
             'group' => $group['Group'],
-            '_serialize' => array('group','balances')
+            'whosup' => $whosup,
+            '_serialize' => array('group','whosup','balances')
         ));
 	}
 
