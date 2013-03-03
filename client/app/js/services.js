@@ -1,5 +1,3 @@
-'use strict';
-
 /* Services */
 
 angular.module('whosUp.services', [])
@@ -71,9 +69,14 @@ angular.module('whosUp.services', [])
         };
 
         facebookConnectService.me = function(callback){
-            FB.api('/me', function(response) {
-                callback(response);
-            });
+            if(self.me){
+                callback(self.me);
+            }else{
+                FB.api('/me', function(response) {
+                    self.me = response;
+                    callback(response);
+                });
+            }
         };
 
         facebookConnectService.logout = function(callback) {

@@ -52,6 +52,7 @@ function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect, G
         title: "",
         total_amount: "",
         group_id: "",
+        payer_id: "",
         subTransactions: []
     };
 
@@ -68,11 +69,15 @@ function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect, G
                 });
                 $scope.$apply();
             });
+            facebookConnect.me(function(user){
+                $scope.transaction.payer_id = user.id;
+            });
         }
     });
 
 
     $scope.newTransaction = function(transactions) {
+        console.log(transactions);
         Transactions.save(transactions);
         $location.path( "/main" );
     };
