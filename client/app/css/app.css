@@ -5077,33 +5077,76 @@ table tfoot tr td {
   max-width: 800px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000346}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000349}}
 header {
   padding: 0.5em 0;
   border-bottom: 1px solid #cccccc;
   background: #F3F3F3;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000351}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000354}}
 header .header-logo img {
   height: 43px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000355}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000358}}
 header .header-balance {
   text-align: right;
   padding: 7px 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000361}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000364}}
 .padded {
   padding: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000365}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000368}}
 .button.tight {
   margin: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000369}}
-.add-form input {
-  margin-bottom: 0;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000377}}
+.user-thumbnail {
+  width: 30px;
+  height: 30px;
+  background-image: url("/whosup/client/app/img/user-thumbnail-default.png");
+  background-size: 30px 30px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000391}}
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000393}}
+.ui-autocomplete {
+  background: #F3F3F3;
+  border: 1px solid #cccccc;
+  list-style-type: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\0000398}}
+.ui-autocomplete .ui-menu-item {
+  display: list-item;
+  overflow: hidden;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003102}}
+.ui-autocomplete .ui-menu-item a {
+  display: block;
+  clear: both;
+  float: left;
+  font-size: 0.875em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003108}}
+.ui-autocomplete .ui-menu-item a.ui-state-focus, .ui-autocomplete .ui-menu-item a.ui-state-active {
+  font-weight: bold;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003112}}
+.ui-autocomplete .ui-menu-item a img {
+  display: block;
+  float: left;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/mnt\/hgfs\/la\/Sites\/whosup\/client\/app\/scss\/app\.scss}line{font-family:\00003113}}
+.ui-autocomplete .ui-menu-item a span {
+  display: block;
+  float: left;
+  line-height: 30px;
+  margin-left: 10px;
 }
