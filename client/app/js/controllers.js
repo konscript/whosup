@@ -2,26 +2,29 @@
 
 /* Controllers */
 
-function BalancesCtrl($scope, UserBalances, facebookConnect) {
+function BalancesCtrl($scope, $rootScope, UserBalances, facebookConnect) {
 
-    //console.log("ME");
-    //console.log(facebookConnect.me());
+    // make sure we're logged in via facebook and have user info available
+    $rootScope.$watch("facebookInit", function(fbReady){
+        if(fbReady){
+            facebookConnect.me(function(facebookUser){
 
-     var balances = UserBalances.get({id: 1}, function(data){
-
-        // iterate through and set class whether balance is in minus or plus
-        $.each(balances.balances, function(index, value) {
-            if (value.balance > 0) {
-                value.klass = "amount-plus";
-            } else if (value.balance === 0) {
-                value.klass = "amount-zero";
-            } else {
-                value.klass = "amount-minus";
-            }
-        });
-
-        $scope.data = balances;
-     });
+                 UserBalances.get({id: 1}, function(data){
+                    // iterate through and set class whether balance is in minus or plus
+                    $.each(data.balances, function(index, value) {
+                        if (value.balance > 0) {
+                            value.klass = "amount-plus";
+                        } else if (value.balance === 0) {
+                            value.klass = "amount-zero";
+                        } else {
+                            value.klass = "amount-minus";
+                        }
+                    });
+                    $scope.data = data;
+                 });
+            });
+        }
+    });
 }
 
 function GroupBalancesCtrl($scope, $routeParams, GroupBalances) {
@@ -42,17 +45,18 @@ function GroupBalancesCtrl($scope, $routeParams, GroupBalances) {
      });
 }
 
-function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect) {
-
-
+function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect, Groups) {
     $scope.availableUsers = [];
-    $scope.selectedUid;
 
     $scope.transaction = {
         title: "",
         total_amount: "",
+        group_id: "",
+        payer_id: "",
         subTransactions: []
     };
+
+    $scope.groups = Groups.query();
 
     $rootScope.$watch("facebookInit", function(fbReady){
         if(fbReady){
@@ -64,6 +68,9 @@ function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect) {
                     };
                 });
                 $scope.$apply();
+            });
+            facebookConnect.me(function(user){
+                $scope.transaction.payer_id = user.id;
             });
         }
     });

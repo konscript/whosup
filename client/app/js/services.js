@@ -1,5 +1,3 @@
-'use strict';
-
 /* Services */
 
 angular.module('whosUp.services', [])
@@ -51,18 +49,34 @@ angular.module('whosUp.services', [])
         }
     );
 })
+.factory('Groups', function($resource) {
+    return $resource(
+        "/whosup/api/groups/:listController:id/:itemController",
+        {
+            id: "@id",
+            listController: "@listController",
+            itemController: "@itemController"
+        }
+    );
+})
 .factory('facebookConnect', function() {
         var facebookConnectService = {};
         var self = this;
         this.auth = null;
 
-
         facebookConnectService.getAuth = function(){
             return self.auth;
         };
 
-        facebookConnectService.me = function(){
-            return self.auth.authResponse.userID;
+        facebookConnectService.me = function(callback){
+            if(self.me){
+                callback(self.me);
+            }else{
+                FB.api('/me', function(response) {
+                    self.me = response;
+                    callback(response);
+                });
+            }
         };
 
         facebookConnectService.logout = function(callback) {
