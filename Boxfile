@@ -1,0 +1,10 @@
+web1:
+  name: wp-web
+  shared_writable_dirs:
+    - api/app/tmp/
+  after_build:
+    - "mv pagoda/database.php app/Config/database.php"
+    - "mv pagoda/core.php app/Config/core.php"
+    - "rm -R pagoda"
+db1:
+  name: wp-db
