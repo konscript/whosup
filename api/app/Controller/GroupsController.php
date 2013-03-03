@@ -9,6 +9,7 @@ class GroupsController extends AppController {
 
    public function index() {
         $groups = $this->Group->find('all');
+
         $this->set(array(
             'groups' => $groups,
             '_serialize' => array('groups')
@@ -80,9 +81,12 @@ class GroupsController extends AppController {
 		$this->loadModel('GroupBalance');
 		$balances = $this->GroupBalance->getBalanceByGroupId($id);
 
+		$group = $this->Group->findById($id);
+
 		$this->set(array(
             'balances' => $balances,
-            '_serialize' => array('balances')
+            'group' => $group['Group'],
+            '_serialize' => array('group','balances')
         ));
 	}
 

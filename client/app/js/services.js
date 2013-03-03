@@ -21,9 +21,9 @@ angular.module('whosUp.services', [])
         }
     );
 })
-.factory('Balances', function($resource) {
+.factory('UserBalances', function($resource) {
     return $resource(
-        "/whosup/api/balances/:listController:id/:itemController",
+        "/whosup/api/users/balances/:listController:id/:itemController",
         {
             id: "@id",
             listController: "@listController",

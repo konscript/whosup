@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-function BalancesCtrl($scope, Transactions) {
-     $scope.transactions = Transactions.query();
+function BalancesCtrl($scope, UserBalances) {
+     $scope.balances = UserBalances.get({itemController:1});
 }
 
 function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect) {

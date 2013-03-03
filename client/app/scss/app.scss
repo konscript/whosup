@@ -69,6 +69,11 @@ header {
     margin: 0;
 }
 
+.button i {
+    margin: 0 10px;
+    font-size: 12px;
+}
+
 // New View
 
 .add-form {
@@ -113,4 +118,36 @@ header {
             span { display: block; float: left; line-height:30px; margin-left: 10px; }
         }
     }
+}
+
+
+// Icon font-size:
+
+@font-face {
+  font-family: 'generalFoundicons';
+  src: url('../lib/foundation_icons_general/fonts/general_foundicons.eot');
+  src: url('../lib/foundation_icons_general/fonts/general_foundicons.eot?#iefix') format('embedded-opentype'),
+       url('../lib/foundation_icons_general/fonts/general_foundicons.woff') format('woff'),
+       url('../lib/foundation_icons_general/fonts/general_foundicons.ttf') format('truetype'),
+       url('../lib/foundation_icons_general/fonts/general_foundicons.svg#generalFoundicons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class*="foundicon-"] {
+  display: inline;
+  width: auto;
+  height: auto;
+  line-height: inherit;
+  vertical-align: baseline;
+  background-image: none;
+  background-position: 0 0;
+  background-repeat: repeat;
+}
+
+[class*="foundicon-"]:before {
+  font-family: "generalFoundicons";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
 }
