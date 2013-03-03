@@ -1,6 +1,9 @@
-<table class="row small-12 columns">
-    <tr ng-repeat="balance in balances">
-        <td>{{ balance.group }}</td>
-        <td>{{ balance.balance }}</td>
+<div class="row padded">
+    <div class="small-12 columns">Groups you have balances in</div>
+</div>
+<table class="row small-12 columns balances-table">
+    <tr ng-repeat="balance in data.balances">
+        <td class="title"><a href="#/group-balances/{{ balance.group.id }}">{{ balance.group.title }}</a></td>
+        <td class="amount {{ balance.klass }}">{{ balance.balance }}</td>
     </tr>
 </table>

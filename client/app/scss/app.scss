@@ -57,7 +57,7 @@ header {
 
     .header-balance {
         text-align: right;
-        padding: 7px 0;
+        padding: 5px 0;
     }
 }
 
@@ -90,6 +90,30 @@ header {
 
 }
 
+
+// Balances View
+
+.balances-table {
+  .amount {
+    text-align: right;
+  }
+}
+
+.amount-minus {
+  color: red;
+}
+
+.amount-plus {
+  color: green;
+}
+
+.amount-zero {
+  color: orange;
+}
+
+.is-up-next {
+  text-align: right;
+}
 
 // jQuery UI styling
 
