@@ -18,9 +18,9 @@ angular.module('whosUp.directives', [])
                         return false;
                     },
                     select:function (event, ui) {
-                        scope.selectedUid = ui.item.label;
-                        scope.facebookUi = ui.item.value;
-                        scope.$apply;
+                        event.preventDefault();
+                        scope.subTransactionUsers.push(ui.item);
+                        scope.$apply();
                         return true;
                     },
                     change:function (event, ui) {
@@ -30,7 +30,7 @@ angular.module('whosUp.directives', [])
                     }
                 }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                     var image_url = "http://graph.facebook.com/" + item.value + "/picture";
-                    return $('<li></li>').data("item.autocomplete", item).append($("<img>").attr('src', image_url)).append('<a>' + item.label + '</a>').appendTo(ul);
+                    return $('<li><a><img src="' + image_url + '" class="user-thumbnail"><span>' + item.label + '</span></a></li>').appendTo(ul);
                 };
             });
         }

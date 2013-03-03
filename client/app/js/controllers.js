@@ -10,9 +10,11 @@ function NewCtrl($scope, $location, Transactions, facebookConnect) {
     $scope.availableTags = [];
     $scope.selectedUid;
 
+    $scope.subTransactionUsers = [];
+
     facebookConnect.getFriends(function(tokens){
         console.log(tokens);
-        $scope.availableTags = tokens.data.map(function(token){
+        $scope.availableUsers = tokens.data.map(function(token){
             return {
                 value: token.id,
                 label: token.name
