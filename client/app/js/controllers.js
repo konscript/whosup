@@ -2,8 +2,8 @@
 
 /* Controllers */
 
-function BalancesCtrl($scope, Transactions) {
-     $scope.transactions = Transactions.query();
+function BalancesCtrl($scope, UserBalances) {
+     $scope.balances = UserBalances.get({itemController:1});
 }
 
 function NewCtrl($scope, $location, Transactions, facebookConnect) {
@@ -13,7 +13,6 @@ function NewCtrl($scope, $location, Transactions, facebookConnect) {
     $scope.subTransactionUsers = [];
 
     facebookConnect.getFriends(function(tokens){
-        console.log(tokens);
         $scope.availableUsers = tokens.data.map(function(token){
             return {
                 value: token.id,
