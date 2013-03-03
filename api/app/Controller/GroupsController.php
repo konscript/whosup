@@ -9,6 +9,7 @@ class GroupsController extends AppController {
 
    public function index() {
         $groups = $this->Group->find('all');
+
         $this->set(array(
             'groups' => $groups,
             '_serialize' => array('groups')
