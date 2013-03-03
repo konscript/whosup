@@ -98,6 +98,17 @@ class GroupsController extends AppController {
         ));
 	}
 
+	public function getUsers($group_id){
+		$this->loadModel('User');
+		$this->Group->recursive = 2;
+		$users = $this->Group->findById($group_id);
+		$users = $users['User'];
+		$this->set(array(
+			'users' => $users,
+            '_serialize' => array('users')
+        ));
+	}
+
 // /**
 //  * index method
 //  *
