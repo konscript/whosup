@@ -2,8 +2,44 @@
 
 /* Controllers */
 
-function BalancesCtrl($scope, UserBalances) {
-     $scope.balances = UserBalances.get({itemController:1});
+function BalancesCtrl($scope, UserBalances, facebookConnect) {
+
+    //console.log("ME");
+    //console.log(facebookConnect.me());
+
+     var balances = UserBalances.get({id: 1}, function(data){
+
+        // iterate through and set class whether balance is in minus or plus
+        $.each(balances.balances, function(index, value) {
+            if (value.balance > 0) {
+                value.klass = "amount-plus";
+            } else if (value.balance === 0) {
+                value.klass = "amount-zero";
+            } else {
+                value.klass = "amount-minus";
+            }
+        });
+
+        $scope.data = balances;
+     });
+}
+
+function GroupBalancesCtrl($scope, $routeParams, GroupBalances) {
+     var balances = GroupBalances.get({id: $routeParams.id}, function(data){
+
+        // iterate through and set class whether balance is in minus or plus
+        $.each(balances.balances, function(index, value) {
+            if (value.balance > 0) {
+                value.klass = "amount-plus";
+            } else if (value.balance === 0) {
+                value.klass = "amount-zero";
+            } else {
+                value.klass = "amount-minus";
+            }
+        });
+
+        $scope.data = balances;
+     });
 }
 
 function NewCtrl($scope, $location, Transactions, facebookConnect) {

@@ -1,0 +1,13 @@
+<div class="row padded">
+    <div class="small-6 columns">Balances in "{{ data.group.title }}"</div>
+    <div class="small-6 columns is-up-next">{{ data.whosup.first_name }} {{ data.whosup.last_name }} is up next!</div>
+</div>
+<table class="row small-12 columns balances-table">
+    <tr ng-repeat="balance in data.balances">
+        <td class="title">{{ balance.user.first_name }} {{ balance.user.last_name }}</td>
+        <td class="amount {{ balance.klass }}">{{ balance.balance }}</td>
+    </tr>
+</table>
+<div class="row">
+    <a href="#/new" class="button small-12 columns"><i class="foundicon-plus"></i>New group transaction</button>
+</div>

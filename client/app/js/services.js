@@ -31,6 +31,16 @@ angular.module('whosUp.services', [])
         }
     );
 })
+.factory('GroupBalances', function($resource) {
+    return $resource(
+        "/whosup/api/groups/balances/:listController:id/:itemController",
+        {
+            id: "@id",
+            listController: "@listController",
+            itemController: "@itemController"
+        }
+    );
+})
 .factory('Users', function($resource) {
     return $resource(
         "/whosup/api/users/:listController:id/:itemController",
@@ -50,6 +60,9 @@ angular.module('whosUp.services', [])
             return self.auth;
         };
 
+        facebookConnectService.me = function(){
+            return self.auth.authResponse.userID;
+        };
 
         facebookConnectService.logout = function(callback) {
             FB.logout(function(response) {
