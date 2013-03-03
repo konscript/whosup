@@ -3,7 +3,7 @@
         <input type="hidden" ng-model="transaction.payer_id" />
         <input type="text" ng-model="transaction.title" placeholder="Give it a name" class="small-6 columns" />
         <input type="number" ng-model="transaction.total_amount" placeholder="How much was it?" class="small-6 columns" />
-        <select ng-model="transaction.group_id" ng-options="group.id as group.title for group in groups"></select>
+        <input type="hidden" ng-model="transaction.group_id" value="{{ transaction.group_id }}"></select>
         <input type="text" placeholder="Who should be included?" class="small-12 columns" autocomplete list="availableUsers" />
         <table class="row small-12 columns subtransactionusers-table">
             <tr ng-repeat="subTransaction in transaction.subTransactions">

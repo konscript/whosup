@@ -45,8 +45,10 @@ function GroupBalancesCtrl($scope, $routeParams, GroupBalances) {
      });
 }
 
-function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect, Groups) {
+function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, facebookConnect, Groups) {
+
     $scope.availableUsers = [];
+    $scope.groups = [];
 
     $scope.transaction = {
         title: "",
@@ -56,7 +58,21 @@ function NewCtrl($scope, $location, $rootScope, Transactions, facebookConnect, G
         subTransactions: []
     };
 
-    $scope.groups = Groups.query();
+    // new transaction for a group
+    if ($routeParams.groupController !== undefined) {
+
+        $scope.transaction.group_id = $routeParams.groupController.id;
+
+        Groups.get({listController: "getUsers", itemController: $routeParams.groupController.id},function(data){
+            $.each(data, function(index, value) {
+                $scope.transaction.subTransactions.push({
+                    value: value.id,
+                    label: value.first_name + ' ' + value.last_name
+                });
+            });
+        });
+
+    }
 
     $rootScope.$watch("facebookInit", function(fbReady){
         if(fbReady){
