@@ -9,8 +9,29 @@ class GroupsController extends AppController {
 
    public function index() {
 
+        // uses('model' . DS . 'connection_manager');
+        // $db = ConnectionManager::getInstance();
+        // @$connected = $db->getDataSource('default');
+
+        $hostname = $_SERVER["DB1_HOST"];
+        $username = $_SERVER["DB1_USER"];
+        $password = $_SERVER["DB1_PASS"];
+
+        try {
+          $db = new PDO("mysql:host=$hostname;dbname=" . $_SERVER['DB1_NAME'], $username, $password);
+          echo "Connected to database";
+        }
+        catch(PDOException $e) {
+          echo $e->getMessage();
+        }
+
+        debug($this->Group->find('all'));
+        exit();
+
         // $this->set(array(
-        //     'groups' => $this->Group->find('all'),
+        //     // 'groups' => $this->Group->find('all'),
+        //     'database' => $db->connection,
+        //     'groups' => $this->Group,
         //     'log' => $this->Group->getDataSource()->getLog(false, false),
         //     '_serialize' => array('groups', 'log')
         // ));
