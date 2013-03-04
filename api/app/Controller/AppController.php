@@ -33,11 +33,11 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     // Restful
-    // public $components = array('RequestHandler');
+    public $components = array('RequestHandler');
 
-    // // Parse everything as JSON
-    // public function beforeFilter(){
-    //     $this->RequestHandler->renderAs($this, 'json');
-    //     parent::beforeFilter();
-    // }
+    // Parse everything as JSON
+    public function beforeFilter(){
+        $this->RequestHandler->renderAs($this, 'json');
+        parent::beforeFilter();
+    }
 }
