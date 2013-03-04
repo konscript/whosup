@@ -9,11 +9,11 @@ class GroupsController extends AppController {
 
    public function index() {
 
-        $this->set(array(
-            'groups' => $this->Group->find('all'),
-            'log' => $this->Group->getDataSource()->getLog(false, false),
-            '_serialize' => array('groups', 'log')
-        ));
+        // $this->set(array(
+        //     'groups' => $this->Group->find('all'),
+        //     'log' => $this->Group->getDataSource()->getLog(false, false),
+        //     '_serialize' => array('groups', 'log')
+        // ));
     }
 
 	public function view($id = null) {
