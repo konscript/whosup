@@ -1,6 +1,35 @@
 /* Services */
 
 angular.module('whosUp.services', [])
+.factory('WhosupApi', ['$rootScope', function($rootScope){
+        var myapi = {};
+        myapi.client = gapi.client.mygoogleapi;
+        // myapi.setLoggedIn = function() {
+        //   myapi.client = gapi.client.mygoogleapi;
+        //   console.log('Service configured with client');
+        // };
+        return myapi;
+    }
+])
+    // I start the login process in my page controller, and when a user is authorized:
+
+    // myApi.setLoggedIn();
+    // $scope.loggedIn= true;
+    // $scope.$digest();
+
+    // And then in any controller:
+
+    // if ($scope.loggedIn)
+    //      // use api if already logged in
+    // else{
+
+    // // Ideally i'd have liked to watch a service variable here, but despite injecting the service into my controller, i couldn't get a watch reference a service property to work
+    // $scope.$watch('loggedIn', function(newValue, oldValue){
+    //   if(newValue){
+    //      // use api here immediately after login
+    //   }
+    // },true);
+// })
 .factory('Transactions', function($resource) {
     return $resource(
         "/whosup/api/transactions/:listController:id/:itemController",

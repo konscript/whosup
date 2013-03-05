@@ -9,6 +9,7 @@ var app = angular.module('whosUp', ['whosUp.filters', 'whosUp.services', 'whosUp
 }]);
 
 app.run(function($rootScope, Users) {
+    $rootScope.endpointsInit = false;
     $rootScope.facebookInit = false;
     $rootScope.userBalance = 0;
     window.fbAsyncInit = function() {
@@ -53,4 +54,31 @@ app.run(function($rootScope, Users) {
          }
        }, {scope: 'email, publish_checkins'});
     };
+
+    var apisToLoad;
+    var callback = function() {
+        if (--apisToLoad === 0) {
+            gapi.auth.authorize({client_id: CLIENT_ID,
+            scope: SCOPES, immediate: mode,
+            response_type: 'token id_token'},
+            function(){
+                var request = gapi.client.oauth2.userinfo.get().execute(function(resp) {
+                    if (!resp.code) {
+                        var token = gapi.auth.getToken();
+                        token.access_token = token.id_token;
+                        gapi.auth.setToken(token);
+                        $rootScope.endpointsInit = true;
+                        $rootScope.$apply();
+                    }
+                });
+
+            });
+        }
+    };
+
+    apisToLoad = 2; // must match number of calls to gapi.client.load()
+
+    gapi.client.load('whosup', 'v1', callback, 'https://' + window.location.host + '/_ah/api');
+
+    gapi.client.load('oauth2', 'v2', callback);
 });
