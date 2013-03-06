@@ -45,7 +45,10 @@ Data import
 2. Setup MySQL database in PHPMyAdmin
 3. Change dir to /api/app and run `../lib/Cake/Console/cake schema create`
 4. Import test data in PHPMyAdmin (generate here: http://www.generatedata.com/#generator)
-5. Create SQL views by running: `CREATE OR REPLACE VIEW group_balances AS
+5. Create SQL views by running:
+
+```
+CREATE OR REPLACE VIEW group_balances AS
 SELECT SUM(amount) as balance, group_id, payer_id as user_id FROM subtransactions
 LEFT JOIN transactions on transactions.id = subtransactions.transaction_id
 GROUP BY user_id, group_id
@@ -53,4 +56,4 @@ UNION
 SELECT -SUM(amount) as balance, group_id, borrower_id as user_id FROM subtransactions
 LEFT JOIN transactions on transactions.id = subtransactions.transaction_id
 GROUP BY user_id, group_id`
-
+```
