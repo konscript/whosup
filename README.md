@@ -24,7 +24,7 @@ Add the following lines to `/etc/hosts`:
 
 Apache setup
 --------------------
-To point the domains ´whosup.local´ and ´api.whosup.local´ to their respective local folders, create the file `/etc/apache2/sites-available/whosup`:
+To point the domains ´whosup.local´ and ´api.whosup.local´ to their respective local folders, create a new virtual hosts by creating the file `/etc/apache2/sites-available/whosup`:
 ```
 <VirtualHost *:80>
     DocumentRoot /srv/www/whosup
@@ -38,6 +38,12 @@ To point the domains ´whosup.local´ and ´api.whosup.local´ to their respecti
 </VirtualHost>
 ```
 *Remember to change `/srv/www/whosup` to your own local path*
+
+Enable the virtual host:
+`sudo a2ensite whosup`
+
+Restart Apache
+`sudo service apache2 restart`
 
 Data import
 --------------------
