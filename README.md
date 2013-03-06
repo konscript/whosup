@@ -39,11 +39,9 @@ To point the domains ´whosup.local´ and ´api.whosup.local´ to their respecti
 ```
 *Remember to change `/srv/www/whosup` to your own local path*
 
-Enable the virtual host:
-`sudo a2ensite whosup`
-
-Restart Apache
-`sudo service apache2 restart`
+** Last stuff **
+Enable the virtual host: `sudo a2ensite whosup`
+Restart Apache: `sudo service apache2 restart`
 
 Data import
 --------------------
