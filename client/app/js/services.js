@@ -1,9 +1,8 @@
-/* Services */
 
 angular.module('whosUp.services', [])
 .factory('Transactions', function($resource) {
     return $resource(
-        "/whosup/api/transactions/:listController:id/:itemController",
+        "http://api." + window.location.hostname + "/transactions/:listController:id/:itemController",
         {
             id: "@id",
             listController: "@listController",
@@ -21,7 +20,7 @@ angular.module('whosUp.services', [])
 })
 .factory('UserBalances', function($resource) {
     return $resource(
-        "/whosup/api/users/balances/:listController:id/:itemController",
+        "http://api." + window.location.hostname + "/users/balances/:listController:id/:itemController",
         {
             id: "@id",
             listController: "@listController",
@@ -31,7 +30,7 @@ angular.module('whosUp.services', [])
 })
 .factory('GroupBalances', function($resource) {
     return $resource(
-        "/whosup/api/groups/balances/:listController:id/:itemController",
+        "http://api." + window.location.hostname + "/groups/balances/:listController:id/:itemController",
         {
             id: "@id",
             listController: "@listController",
@@ -41,7 +40,7 @@ angular.module('whosUp.services', [])
 })
 .factory('Users', function($resource) {
     return $resource(
-        "/whosup/api/users/:listController:id/:itemController",
+        "http://api." + window.location.hostname + "/users/:listController:id/:itemController",
         {
             id: "@id",
             listController: "@listController",
@@ -51,7 +50,7 @@ angular.module('whosUp.services', [])
 })
 .factory('Groups', function($resource) {
     return $resource(
-        "/whosup/api/groups/:listController:id/:itemController",
+        "http://api." + window.location.hostname + "/groups/:listController:id/:itemController",
         {
             id: "@id",
             listController: "@listController",

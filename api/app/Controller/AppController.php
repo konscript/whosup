@@ -37,6 +37,9 @@ class AppController extends Controller {
 
     // Parse everything as JSON
     public function beforeFilter(){
+        $this->response->header('Access-Control-Allow-Origin', 'http://whosup.local');
+        $this->response->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+
         $this->RequestHandler->renderAs($this, 'json');
         parent::beforeFilter();
     }
