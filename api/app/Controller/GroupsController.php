@@ -8,10 +8,10 @@ App::uses('AppController', 'Controller');
 class GroupsController extends AppController {
 
    public function index() {
-        $groups = $this->Group->find('all');
+        //$log = $this->Group->getDataSource()->getLog(false, false);
 
         $this->set(array(
-            'groups' => $groups,
+            'groups' => $this->Group->find('all'),
             '_serialize' => array('groups')
         ));
     }
@@ -81,11 +81,11 @@ class GroupsController extends AppController {
 		$this->loadModel('GroupBalance');
 		$balances = $this->GroupBalance->getBalanceByGroupId($id);
 		$hiscore = 0;
-		$whosup = array(); 
+		$whosup = array();
 		foreach ($balances as $b){
 			if ($b['balance'] < $hiscore){
 				$whosup = $b['user'];
-				$hiscore = $b['balance']; 
+				$hiscore = $b['balance'];
 			}
 		}
 		$group = $this->Group->findById($id);

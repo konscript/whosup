@@ -1,20 +1,23 @@
 web1:
-  name: wp-web
-  shared_writable_dirs:
-    - api/app/tmp/logs
-    - api/app/tmp/cache/persistent/
-    - api/app/tmp/cache
-    - api/app/tmp/sessions
-    - api/app/tmp/tests
-    - api/app/tmp
-  php_extensions:
-    - mcrypt
-    - mysqli
-    - mbstring
-    - pdo_mysql
-  after_build:
-    - "mv pagoda/database.php api/app/Config/database.php"
-    - "mv pagoda/core.php api/app/Config/core.php"
-    - "rm -R pagoda"
+    name: frontend
+web2:
+    name: api
+    document_root: api/app/webroot
+    shared_writable_dirs:
+        - api/app/tmp/cache
+        - api/app/tmp/logs
+        - api/app/tmp/sessions
+        - api/app/tmp/tests
+        - api/app/tmp
+    php_extensions:
+        - mcrypt
+        - apc
+        - pdo_mysql
+        - mysqli
+        - mbstring
+    after_build:
+        - "mv pagoda/database.php api/app/Config/database.php"
+        - "mv pagoda/core.php api/app/Config/core.php"
 db1:
-  name: wp-db
+    name: db
+    type: mysql
