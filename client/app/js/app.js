@@ -41,7 +41,7 @@ app.run(function($rootScope, Users) {
                 $rootScope.userBalance = data.total_balance;
                 $rootScope.userBalanceClass = data.klass;
 
-                if(!$scope.$$phase) {
+                if(!$rootScope.$$phase) {
                   $rootScope.$apply();
                 }
               });
