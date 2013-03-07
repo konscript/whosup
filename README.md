@@ -3,11 +3,19 @@ Pitch
 
 Making money lending and owes easy since 2013
 
-Platform
+Platform (Apache, PHP, MySQL)
 --------------------
 
-Setup LAMP stack: https://help.ubuntu.com/community/ApacheMySQLPHP
+Install Tasksel:
+`sudo apt-get install tasksel`
 
+And the LAMP stack:
+`sudo tasksel install lamp-server`
+
+PHPMyAdmin:
+`sudo apt-get install phpmyadmin`
+
+Read more: https://help.ubuntu.com/community/ApacheMySQLPHP
 
 DNS setup
 --------------------

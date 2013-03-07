@@ -37,7 +37,7 @@ class AppController extends Controller {
 
     // Parse everything as JSON
     public function beforeFilter(){
-        //$this->response->header('Access-Control-Allow-Origin', 'http://whosup.*');
+        //$this->response->header('Access-Control-Allow-Origin', 'http://whosup.local');
         $this->response->header('Access-Control-Allow-Origin', '*');
         $this->response->header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
         $this->response->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
