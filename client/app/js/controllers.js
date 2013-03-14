@@ -115,6 +115,7 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
                 // Hmm nothing to do here really
             }else{
                 subTransaction.amount = subTransaction.split_amount;
+                delete subTransaction.split_amount;
             }
         });
         Transactions.save($scope.transaction);
