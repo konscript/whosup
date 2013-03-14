@@ -51,7 +51,7 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
     $scope.transaction = {
         title: "",
         total_amount: "",
-        group_id: "",
+        group_id: undefined,
         payer_id: "",
         subTransactions: []
     };
@@ -128,5 +128,6 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
                 $scope.transaction.subTransactions.splice(index, 1);
             }
         });
+        $scope.updateAmounts();
     };
 }
