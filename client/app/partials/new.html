@@ -2,7 +2,7 @@
     <div class="row padded">
         <input type="hidden" ng-model="transaction.payer_id" />
         <input type="text" ng-model="transaction.title" placeholder="Give it a name" class="small-6 columns" />
-        <input type="number" ng-model="transaction.total_amount" placeholder="How much was it?" class="small-6 columns" />
+        <input type="number" ng-model="transaction.total_amount" placeholder="How much was it?" class="small-6 columns" ng-change="updateAmounts()" />
         <input type="hidden" ng-model="transaction.group_id" value="{{ transaction.group_id }}"></select>
         <input type="text" placeholder="Who should be included?" class="small-12 columns" autocomplete list="availableUsers" />
         <table class="row small-12 columns subtransactionusers-table">
@@ -12,7 +12,7 @@
                 <td>
                     <input type="hidden" ng-model="subTransaction.value" value="{{ subTransaction.value }}" />
                     <input type="hidden" ng-model="subTransaction.label" value="{{ subTransaction.label }}" />
-                    <input type="number"class="amount-input" ng-model="subTransaction.amount" ng-change="updateAmount()" placeholder="Amount?" />
+                    <input type="number"class="amount-input" ng-model="subTransaction.amount" ng-change="updateAmounts()" placeholder="{{subTransaction.split_amount}}" />
                 </td>
                 <td>
                     <button class="button small secondary remove-subtransaction" ng-click="removeSubTransaction(subTransaction.value)"><i class="foundicon-remove"></i></button>
