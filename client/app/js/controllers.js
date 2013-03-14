@@ -109,8 +109,15 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
         });
     };
 
-    $scope.newTransaction = function(transactions) {
-        Transactions.save(transactions);
+    $scope.newTransaction = function() {
+        $.each($scope.transaction.subTransactions, function(index, subTransaction) {
+            if(subTransaction.amount){
+                // Hmm nothing to do here really
+            }else{
+                subTransaction.amount = subTransaction.split_amount;
+            }
+        });
+        Transactions.save($scope.transaction);
         $location.path( "/main" );
     };
 
