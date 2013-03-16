@@ -43,7 +43,7 @@ function GroupBalancesCtrl($scope, $routeParams, GroupBalances) {
      });
 }
 
-function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, facebookConnect, Groups) {
+function NewCtrl($scope, $location, $rootScope, $routeParams, facebookConnect, WhosupApi) {
 
     $scope.availableUsers = [];
     $scope.groups = [];
@@ -56,20 +56,23 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
         subTransactions: []
     };
 
-    // new transaction for a group
-    if ($routeParams.groupController !== undefined) {
-        $scope.transaction.group_id = $routeParams.id;
-        Groups.get({listController: "getUsers", itemController: $routeParams.id},function(data){
-            $.each(data.users, function(index, value) {
-                $scope.transaction.subTransactions.push({
-                    value: value.id,
-                    label: value.first_name + ' ' + value.last_name
+    $rootScope.$watch("endpointsInit", function(fbReady){
+        // new transaction for a group
+        if ($routeParams.groupController !== undefined) {
+            $scope.transaction.group_id = $routeParams.id;
+            Groups.get({listController: "getUsers", itemController: $routeParams.id},function(data){
+                $.each(data.users, function(index, value) {
+                    $scope.transaction.subTransactions.push({
+                        value: value.id,
+                        label: value.first_name + ' ' + value.last_name
+                    });
                 });
             });
-        });
-    }
+        }
+    });
 
     $rootScope.$watch("facebookInit", function(fbReady){
+        console.log(fbReady);
         if(fbReady){
             facebookConnect.getFriends(function(tokens){
                 $scope.availableUsers = tokens.data.map(function(token){
@@ -112,14 +115,17 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
     $scope.newTransaction = function() {
         $.each($scope.transaction.subTransactions, function(index, subTransaction) {
             if(subTransaction.amount){
+                subTransaction.amount = Math.floor(subTransaction.amount * 100);
                 // Hmm nothing to do here really
             }else{
-                subTransaction.amount = subTransaction.split_amount;
+                subTransaction.amount = Math.floor(subTransaction.split_amount * 100);
                 delete subTransaction.split_amount;
             }
         });
-        Transactions.save($scope.transaction);
-        $location.path( "/main" );
+        gapi.client.whosup.transaction.insert($scope.transaction).execute(function(response){
+            console.log(response);
+        });
+        //$location.path( "/main" );
     };
 
     $scope.removeSubTransaction = function(userId) {

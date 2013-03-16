@@ -1,13 +1,7 @@
 
 angular.module('whosUp.services', [])
-.factory('WhosupApi', ['$rootScope', function($rootScope){
-        var myapi = {};
-        myapi.client = gapi.client.mygoogleapi;
-        // myapi.setLoggedIn = function() {
-        //   myapi.client = gapi.client.mygoogleapi;
-        //   console.log('Service configured with client');
-        // };
-        return myapi;
+.factory('WhosupApi', ['$rootScope', function(){
+        return gapi.client.whosup;
     }
 ])
     // I start the login process in my page controller, and when a user is authorized:
@@ -29,7 +23,7 @@ angular.module('whosUp.services', [])
     //   }
     // },true);
 // })
-.factory('Transactions', function($resource) {
+.factory('Transactions', function() {
     return $resource(
         "http://api." + window.location.hostname + "/transactions/:listController:id/:itemController",
         {

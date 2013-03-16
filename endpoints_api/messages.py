@@ -11,7 +11,7 @@ class TransactionRequest(messages.Message):
     payer_id = messages.IntegerField(2, required=True)
     group = messages.IntegerField(3)
     total_amount = messages.IntegerField(4, required=True)
-    sub_transactions = messages.MessageField(SubTransaction, 5, repeated=True)
+    subTransactions = messages.MessageField(SubTransaction, 5, repeated=True)
 
 
 class TransactionsRequest(messages.Message):
