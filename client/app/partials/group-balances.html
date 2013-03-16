@@ -3,7 +3,7 @@
     <div class="small-6 columns is-up-next">{{ data.whosup.first_name }} {{ data.whosup.last_name }} is up next!</div>
 </div>
 <table class="row small-12 columns balances-table">
-    <tr ng-repeat="balance in data.balances">
+    <tr ng-repeat="balance in group_balances">
         <td class="title">{{ balance.user.first_name }} {{ balance.user.last_name }}</td>
         <td class="amount {{ balance.klass }}">{{ balance.balance }}</td>
     </tr>

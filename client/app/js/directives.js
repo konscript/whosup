@@ -1,5 +1,3 @@
-'use strict';
-
 /* Directives */
 
 
@@ -19,10 +17,8 @@ angular.module('whosUp.directives', [])
                     },
                     select:function (event, ui) {
                         event.preventDefault();
-                        scope.transaction.subTransactions.push(ui.item);
-                        scope.updateAmounts();
+                        scope.addUser(ui.item);
                         element.val("");
-                        scope.$apply();
                         return true;
                     },
                     change:function (event, ui) {

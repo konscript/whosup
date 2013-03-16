@@ -1,9 +1,18 @@
 from protorpc import messages
 
 
-class SubTransaction(messages.Message):
+class UserBalanceRequest(messages.Message):
     user_id = messages.IntegerField(1, required=True)
-    amount = messages.IntegerField(2, required=True)
+
+
+class UserBalanceResponse(messages.Message):
+    balance = messages.IntegerField(1, required=True)
+
+
+class SubTransaction(messages.Message):
+    borrower_id = messages.IntegerField(1, required=True)
+    borrower_name = messages.StringField(2, required=True)
+    amount = messages.IntegerField(3, required=True)
 
 
 class TransactionRequest(messages.Message):
@@ -32,11 +41,6 @@ class BalanceResponse(messages.Message):
     payer_id = messages.IntegerField(1)
     borrower_id = messages.IntegerField(2)
     balance = messages.IntegerField(3)
-
-
-class BalancesResponse(messages.Message):
-    balances = messages.MessageField(BalanceResponse, 1, repeated=True)
-    group_balances = messages.MessageField(BalanceResponse, 2, repeated=True)
 
 
 class UserRequest(messages.Message):
@@ -68,3 +72,13 @@ class GroupResponse(messages.Message):
 
 class GroupsResponse(messages.Message):
     groups = messages.MessageField(GroupResponse, 1, repeated=True)
+
+
+class GroupBalanceResponse(messages.Message):
+    group = messages.MessageField(GroupResponse, 1)
+    balance = messages.IntegerField(2)
+
+
+class BalancesResponse(messages.Message):
+    balances = messages.MessageField(BalanceResponse, 1, repeated=True)
+    group_balances = messages.MessageField(GroupBalanceResponse, 2, repeated=True)

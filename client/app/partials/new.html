@@ -7,15 +7,15 @@
         <input type="text" placeholder="Who should be included?" class="small-12 columns" autocomplete list="availableUsers" />
         <table class="row small-12 columns subtransactionusers-table">
             <tr ng-repeat="subTransaction in transaction.subTransactions">
-                <td><img src="http://graph.facebook.com/{{ subTransaction.value }}/picture" ng-show="subTransaction.value" class="user-thumbnail"/></td>
-                <td>{{ subTransaction.label }}</td>
+                <td><img src="http://graph.facebook.com/{{ subTransaction.borrower_id }}/picture" ng-show="subTransaction.borrower_id" class="user-thumbnail"/></td>
+                <td>{{ subTransaction.borrower_name }}</td>
                 <td>
-                    <input type="hidden" ng-model="subTransaction.value" value="{{ subTransaction.value }}" />
-                    <input type="hidden" ng-model="subTransaction.label" value="{{ subTransaction.label }}" />
+                    <input type="hidden" ng-model="subTransaction.borrower_id" value="{{ subTransaction.borrower_id }}" />
+                    <input type="hidden" ng-model="subTransaction.borrower_name" value="{{ subTransaction.borrower_name }}" />
                     <input type="number"class="amount-input" ng-model="subTransaction.amount" ng-change="updateAmounts()" placeholder="{{subTransaction.split_amount}}" />
                 </td>
                 <td>
-                    <button class="button small secondary remove-subtransaction" ng-click="removeSubTransaction(subTransaction.value)"><i class="foundicon-remove"></i></button>
+                    <button class="button small secondary remove-subtransaction" ng-click="removeSubTransaction(subTransaction.borrower_id)"><i class="foundicon-remove"></i></button>
                 </td>
             </tr>
         </table>

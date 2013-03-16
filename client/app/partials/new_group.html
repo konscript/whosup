@@ -1,0 +1,24 @@
+<form novalidate class="add-form" ng-model="group">
+    <div class="row padded">
+        <input type="hidden" ng-model="group.payer_id" />
+        <input type="text" ng-model="group.title" placeholder="Give it a name" class="small-6 columns" />
+        <input type="text" placeholder="Who should be included?" class="small-12 columns" autocomplete list="availableUsers" />
+        <table class="row small-12 columns subgroupusers-table">
+            <tr ng-repeat="member in group.members">
+                <td><img src="http://graph.facebook.com/{{ member.user_id }}/picture" ng-show="member.user_id" class="user-thumbnail"/></td>
+                <td>{{ member.user_name }}</td>
+                <td>
+                    <input type="hidden" ng-model="member.user_id" value="{{ member.user_id }}" />
+                    <input type="hidden" ng-model="member.user_name" value="{{ member.user_name }}" />
+                </td>
+                <td>
+                    <button class="button small secondary remove-subtransaction" ng-click="removeUser(member.user_id)"><i class="foundicon-remove"></i></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<div class="row">
+    <button ng-click="newGroup()" class="button small-12 columns"><i class="foundicon-plus"></i>Add it!</button>
+</div>

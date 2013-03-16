@@ -18,6 +18,25 @@ dthandler = lambda obj: int(obj) if isinstance(obj, decimal.Decimal) else obj
                description='API for whosup !',
                allowed_client_ids=[CLIENT_ID, endpoints.API_EXPLORER_CLIENT_ID])
 class WhosupApi(remote.Service):
+    @endpoints.method(whosup_messages.UserBalanceRequest,
+                      whosup_messages.UserBalanceResponse,
+                      name='balance',
+                      path="balance",
+                      http_method="GET"
+                      )
+    def get_user_balance(self, user):
+        conn = rdbms.connect(instance="", database='whosup')
+        cursor = conn.cursor()
+
+        #Get user balance
+        cursor.execute("SELECT SUM(balance) as balance FROM balance_union WHERE payer_id=%s" % (user.user_id))
+
+        balance = int(cursor.fetchone()[0] or 0)
+
+        conn.close()
+
+        return whosup_messages.UserBalanceResponse(balance=balance)
+
     @endpoints.method(whosup_messages.TransactionsRequest,
                       whosup_messages.TransactionsResponse,
                       name='transactions.list',
@@ -56,7 +75,7 @@ class WhosupApi(remote.Service):
                         row = cursor.fetchone()
                     tag = row[0]
                     tag_ids.append(tag)
-            cursor.execute('INSERT INTO subtransactions (payer_id, borrower_id, amount, transaction_id) VALUES (%s, %s, %s, %s)', (sub_transaction.payer_id, sub_transaction.borrower_id, int(sub_transaction.amount), int(info_id)))
+            cursor.execute('INSERT INTO subtransactions (payer_id, borrower_id, amount, transaction_id) VALUES (%s, %s, %s, %s)', (transaction.payer_id, sub_transaction.borrower_id, int(sub_transaction.amount), int(info_id)))
             cursor.execute('SELECT LAST_INSERT_ID()')
             row = cursor.fetchone()
             trans_id = row[0]
@@ -73,7 +92,7 @@ class WhosupApi(remote.Service):
                       path="balances",
                       http_method="GET"
                       )
-    def get_balances(self, request):
+    def get_all_balances(self, request):
 
         conn = rdbms.connect(instance="", database='whosup')
         balances = []
@@ -81,7 +100,7 @@ class WhosupApi(remote.Service):
         cursor = conn.cursor()
 
         #Get group_balances
-        cursor.execute("SELECT * FROM group_balances WHERE user_id='%s'" % (request.user_id))
+        cursor.execute("SELECT SUM(balance) as balance, group_id FROM group_balances WHERE user_id='%s' ORDER BY group_id" % (request.user_id))
 
         for row in cursor.fetchall():
             group_balance = {}
@@ -101,9 +120,76 @@ class WhosupApi(remote.Service):
         conn.close()
 
         balances = [whosup_messages.BalanceResponse(payer_id=balance["payer_id"], borrower_id=balance["borrower_id"], balance=balance["balance"]) for balance in balances]
+        group_balance_messages = []
+
+        for balance in group_balances:
+            if balance["group_id"]:
+                cursor.execute("SELECT * FROM group WHERE id='%s'" % (balance["group_id"]))
+                group_dict = {}
+                group_row = cursor.fetchone()
+                for index, column in enumerate(group_row):
+                    group_dict[cursor.description[index][0]] = (int(column) if not isinstance(column, basestring) else column.decode("latin-1")) if column else None
+                group = whosup_messages.GroupResponse(title=group_dict["title"], balance=balance["balance"], users=[])
+            else:
+                group = whosup_messages.GroupResponse(title="Empty", balance=balance["balance"], users=[])
+            logging.info(group)
+            group_balance_messages.append(whosup_messages.GroupBalanceResponse(group=group, balance=balance["balance"]))
+
+        return whosup_messages.BalancesResponse(balances=balances, group_balances=group_balance_messages)
+
+    @endpoints.method(whosup_messages.BalancesRequest,
+                      whosup_messages.BalancesResponse,
+                      name='groupbalances.list',
+                      path="groupbalances",
+                      http_method="GET"
+                      )
+    def get_group_balances(self, request):
+
+        conn = rdbms.connect(instance="", database='whosup')
+        group_balances = []
+        cursor = conn.cursor()
+
+        #Get group_balances
+        cursor.execute("SELECT * FROM group_balances WHERE user_id='%s'" % (request.user_id))
+
+        for row in cursor.fetchall():
+            group_balance = {}
+            for index, column in enumerate(row):
+                group_balance[cursor.description[index][0]] = (int(column) if not isinstance(column, basestring) else column.decode("latin-1")) if column else None
+            group_balances.append(group_balance)
+
+        conn.close()
+
         group_balances = [whosup_messages.BalanceResponse(payer_id=balance["user_id"], borrower_id=balance["group_id"], balance=balance["balance"]) for balance in group_balances]
 
-        return whosup_messages.BalancesResponse(balances=balances, group_balances=group_balances)
+        return whosup_messages.BalancesResponse(group_balances=group_balances)
+
+    @endpoints.method(whosup_messages.BalancesRequest,
+                      whosup_messages.BalancesResponse,
+                      name='userbalances.list',
+                      path="userbalances",
+                      http_method="GET"
+                      )
+    def get_user_balances(self, request):
+
+        conn = rdbms.connect(instance="", database='whosup')
+        balances = []
+        cursor = conn.cursor()
+
+        #Get balances
+        cursor.execute("SELECT * FROM balances WHERE payer_id='%s' OR borrower_id='%s'" % (request.user_id, request.user_id))
+
+        for row in cursor.fetchall():
+            balance = {}
+            for index, column in enumerate(row):
+                balance[cursor.description[index][0]] = (int(column) if not isinstance(column, basestring) else column.decode("latin-1")) if column else None
+            balances.append(balance)
+
+        conn.close()
+
+        balances = [whosup_messages.BalanceResponse(payer_id=balance["payer_id"], borrower_id=balance["borrower_id"], balance=balance["balance"]) for balance in balances]
+
+        return whosup_messages.BalancesResponse(balances=balances)
 
     @endpoints.method(whosup_messages.GroupsRequest,
                       whosup_messages.GroupsResponse,
