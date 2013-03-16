@@ -87,12 +87,17 @@ header {
     height: 30px;
     min-width: 30px;
     min-height: 30px;
-    background-image: url('/whosup/client/app/img/user-thumbnail-default.png');
+    background-image: url('/img/user-thumbnail-default.png');
     background-size: 30px 30px;
 }
 
 .subtransactionusers-table {
+  padding: 0;
+}
 
+.remove-subtransaction {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 

@@ -1,5 +1,3 @@
-'use strict';
-
 /* Controllers */
 
 function BalancesCtrl($scope, $rootScope, UserBalances, facebookConnect) {
@@ -9,7 +7,7 @@ function BalancesCtrl($scope, $rootScope, UserBalances, facebookConnect) {
         if(fbReady){
             facebookConnect.me(function(facebookUser){
 
-                 UserBalances.get({id: 1}, function(data){
+                 UserBalances.get({id: facebookUser.id}, function(data){
                     // iterate through and set class whether balance is in minus or plus
                     $.each(data.balances, function(index, value) {
                         if (value.balance > 0) {
@@ -53,16 +51,14 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
     $scope.transaction = {
         title: "",
         total_amount: "",
-        group_id: "",
+        group_id: undefined,
         payer_id: "",
         subTransactions: []
     };
 
     // new transaction for a group
     if ($routeParams.groupController !== undefined) {
-
         $scope.transaction.group_id = $routeParams.id;
-
         Groups.get({listController: "getUsers", itemController: $routeParams.id},function(data){
             $.each(data.users, function(index, value) {
                 $scope.transaction.subTransactions.push({
@@ -71,7 +67,6 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
                 });
             });
         });
-
     }
 
     $rootScope.$watch("facebookInit", function(fbReady){
@@ -87,21 +82,43 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
             });
             facebookConnect.me(function(user){
                 $scope.transaction.payer_id = user.id;
+                $scope.transaction.subTransactions.push({
+                    value: user.id,
+                    label: user.first_name + ' ' + user.last_name
+                });
             });
         }
     });
 
-    $scope.updateAmount = function(){
-        $scope.transaction.total_amount = 0;
+    $scope.updateAmounts = function(){
+        var restAmount = $scope.transaction.total_amount;
+        var subTransactionsWithoutAmount = [];
 
         $.each($scope.transaction.subTransactions, function(index, subTransaction) {
-            $scope.transaction.total_amount += subTransaction.amount;
+            if(subTransaction.amount){
+                restAmount -= subTransaction.amount;
+            }else{
+                subTransactionsWithoutAmount.push(subTransaction);
+            }
         });
 
+        var splitAmount = restAmount/subTransactionsWithoutAmount.length;
+
+        $.each(subTransactionsWithoutAmount, function(index, subTransaction) {
+            subTransaction.split_amount = splitAmount;
+        });
     };
 
-    $scope.newTransaction = function(transactions) {
-        Transactions.save(transactions);
+    $scope.newTransaction = function() {
+        $.each($scope.transaction.subTransactions, function(index, subTransaction) {
+            if(subTransaction.amount){
+                // Hmm nothing to do here really
+            }else{
+                subTransaction.amount = subTransaction.split_amount;
+                delete subTransaction.split_amount;
+            }
+        });
+        Transactions.save($scope.transaction);
         $location.path( "/main" );
     };
 
@@ -111,5 +128,6 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, Transactions, face
                 $scope.transaction.subTransactions.splice(index, 1);
             }
         });
+        $scope.updateAmounts();
     };
 }

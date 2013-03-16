@@ -20,6 +20,7 @@ angular.module('whosUp.directives', [])
                     select:function (event, ui) {
                         event.preventDefault();
                         scope.transaction.subTransactions.push(ui.item);
+                        scope.updateAmounts();
                         element.val("");
                         scope.$apply();
                         return true;

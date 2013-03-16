@@ -35,7 +35,13 @@ class AppController extends Controller {
     // Restful
     public $components = array('RequestHandler');
 
+    // Parse everything as JSON
     public function beforeFilter(){
+        //$this->response->header('Access-Control-Allow-Origin', 'http://whosup.local');
+        $this->response->header('Access-Control-Allow-Origin', '*');
+        $this->response->header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        $this->response->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+
         $this->RequestHandler->renderAs($this, 'json');
         parent::beforeFilter();
     }
