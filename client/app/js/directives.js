@@ -18,6 +18,7 @@ angular.module('whosUp.directives', [])
                     select:function (event, ui) {
                         event.preventDefault();
                         scope.addUser(ui.item);
+                        scope.$apply();
                         element.val("");
                         return true;
                     },

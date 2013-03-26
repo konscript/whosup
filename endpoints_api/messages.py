@@ -49,11 +49,12 @@ class UserRequest(messages.Message):
 
 
 class UserResponse(messages.Message):
-    user_id = messages.IntegerField(1)
-    facebook_id = messages.IntegerField(2)
-    first_name = messages.StringField(3)
-    last_name = messages.StringField(4)
-    total_balance = messages.IntegerField(5)
+    user_id = messages.IntegerField(1, required=True)
+    email = messages.StringField(2)
+    facebook_id = messages.IntegerField(3)
+    first_name = messages.StringField(4)
+    last_name = messages.StringField(5)
+    total_balance = messages.IntegerField(6)
 
 
 class GroupsRequest(messages.Message):
@@ -64,10 +65,15 @@ class GroupUsers(messages.Message):
     users = messages.MessageField(UserResponse, 1, repeated=True)
 
 
+class GroupRequest(messages.Message):
+    group_id = messages.IntegerField(1)
+
+
 class GroupResponse(messages.Message):
-    title = messages.StringField(1)
-    balance = messages.IntegerField(2)
-    users = messages.MessageField(UserResponse, 3, repeated=True)
+    group_id = messages.IntegerField(1)
+    title = messages.StringField(2)
+    balance = messages.IntegerField(3)
+    members = messages.MessageField(UserResponse, 4, repeated=True)
 
 
 class GroupsResponse(messages.Message):

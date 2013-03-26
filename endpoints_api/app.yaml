@@ -12,3 +12,5 @@ handlers:
 libraries:
 - name: pycrypto
   version: "2.6"
+- name: django
+  version: "1.4"

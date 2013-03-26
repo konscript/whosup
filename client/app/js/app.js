@@ -30,7 +30,7 @@ app.run(function($rootScope) {
         $rootScope.$apply();
     }
 
-    gapi.client.load('whosup', 'v1', callback, 'http://' + window.location.host + ':8080/_ah/api');
+    gapi.client.load('whosup', 'v1', callback, 'http://' + window.location.host + ':8081/_ah/api');
 
     //Set overall user balance
     $rootScope.$watch('[facebookInit, endpointsInit]',
