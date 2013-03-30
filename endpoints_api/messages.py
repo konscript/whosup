@@ -2,7 +2,16 @@ from protorpc import messages
 
 
 class UserBalanceRequest(messages.Message):
-    user_id = messages.IntegerField(1, required=True)
+    id = messages.IntegerField(1, required=True)
+    first_name = messages.StringField(2)
+    last_name = messages.StringField(3)
+    middle_name = messages.StringField(4)
+    link = messages.StringField(5)
+    username = messages.StringField(6)
+    gender = messages.StringField(7)
+    email = messages.StringField(8)
+    locale = messages.StringField(9)
+    verified = messages.BooleanField(10)
 
 
 class UserBalanceResponse(messages.Message):
@@ -17,7 +26,7 @@ class SubTransaction(messages.Message):
 
 class TransactionRequest(messages.Message):
     title = messages.StringField(1, required=True)
-    payer_id = messages.IntegerField(2, required=True)
+    payer = messages.MessageField(UserBalanceRequest, 2, required=True)
     group = messages.IntegerField(3)
     total_amount = messages.IntegerField(4, required=True)
     subTransactions = messages.MessageField(SubTransaction, 5, repeated=True)

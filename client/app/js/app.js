@@ -38,7 +38,7 @@ app.run(function($rootScope) {
             console.log(ready);
             if(ready[0] && ready[1]){
                 FB.api('/me', function(facebookUser){
-                    gapi.client.whosup.balance({user_id: facebookUser.id}).execute(function(data){
+                    gapi.client.whosup.balance(facebookUser).execute(function(data){
                         var balClass;
                         if (data.balance > 0) {
                             balClass = "amount-plus";

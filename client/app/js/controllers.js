@@ -7,7 +7,8 @@ function BalancesCtrl($scope, $rootScope, facebookConnect) {
         function(ready){
             if(ready[0] && ready[1]){
                 facebookConnect.me(function(facebookUser){
-                    gapi.client.whosup.balances.list({user_id: facebookUser.id}).execute(function(data){
+                    gapi.client.whosup.balances.list(facebookUser).execute(function(data){
+                        console.log(facebookUser);
                         // iterate through and set class whether balance is in minus or plus
                         $.each(data.balances, function(index, value) {
                             if (value.balance > 0) {
@@ -86,7 +87,7 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, facebookConnect) {
             //Get facebook profile
             facebookConnect.me(function(user){
                 //Set payer id
-                $scope.transaction.payer_id = user.id;
+                $scope.transaction.payer = user;
 
                 //Automatically add user to transaction
                 $scope.transaction.subTransactions.push({

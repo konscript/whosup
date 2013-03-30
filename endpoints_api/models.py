@@ -1,14 +1,21 @@
 import peewee
+import datetime
 
-database = peewee.MySQLDatabase('whosup2', user='root', password='tismando')
+database = peewee.MySQLDatabase('whosup', user='root', password='tismando')
 
 
 class User(peewee.Model):
+    facebook_id = peewee.IntegerField(unique=True)
     first_name = peewee.CharField()
     last_name = peewee.CharField()
-    facebook_id = peewee.CharField()
-    join_date = peewee.DateTimeField()
-    facebook_token = peewee.CharField()
+    join_date = peewee.DateTimeField(default=datetime.datetime.now)
+    facebook_token = peewee.CharField(default="")
+    middle_name = peewee.CharField(default="")
+    link = peewee.CharField(default="")
+    username = peewee.CharField(default="")
+    gender = peewee.CharField(default="")
+    email = peewee.CharField(default="")
+    locale = peewee.CharField(default="")
 
     def __unicode__(self):
         return '%s %s' % (self.first_name, self.last_name)
@@ -19,9 +26,9 @@ class User(peewee.Model):
     def balance(self):
         return SubTransaction.select(
             SubTransaction.borrower.alias("payer"),
-            peewee.fn.Sum(SubTransaction.amount)
-        ).where(
-            (SubTransaction.payer == self) | (SubTransaction.borrower == self)
+            peewee.fn.Sum(SubTransaction.amount).alias("balance")
+        ).join(Transaction).where(
+            ((Transaction.payer == self) & (SubTransaction.borrower != self)) | ((SubTransaction.borrower == self) & (Transaction.payer != self))
         )
 
     def balance_against(self, user):
@@ -33,12 +40,20 @@ class User(peewee.Model):
             ((SubTransaction.payer == user) & (SubTransaction.payer == self)) | ((SubTransaction.payer == self) & (SubTransaction.payer == user))
         )
 
-    def tag_balances(self):
-        return TagTransaction.select(
+    def tag_balances(self, tag=None):
+        query = TagTransaction.select(
+            Tag.title,
             peewee.fn.Sum(SubTransaction.amount)
-        ).join(SubTransaction).switch(TagTransaction).join(Tag).where(
-            (SubTransaction.payer == self) | (SubTransaction.borrower == self)
+        ).join(SubTransaction).join(Transaction).switch(TagTransaction).join(Tag).where(
+            ((Transaction.payer == self) & (SubTransaction.borrower != self)) | ((SubTransaction.borrower == self) & (Transaction.payer != self))
         )
+
+        if tag:
+            query.where(Tag.id == tag)
+
+        query.group_by(Tag)
+
+        return query
 
 
 class Tag(peewee.Model):
@@ -50,6 +65,11 @@ class Tag(peewee.Model):
     class Meta:
         database = database
 
+    def members(self):
+        return TagUser.select(
+            User
+        ).join(Tag).switch(TagUser).join(User).where(Tag == self)
+
     def balances(self):
         return TagUser.select(
             User,
@@ -59,7 +79,8 @@ class Tag(peewee.Model):
 
 class Transaction(peewee.Model):
     title = peewee.CharField()
-    creation_date = peewee.DateTimeField()
+    payer = peewee.ForeignKeyField(User)
+    creation_date = peewee.DateTimeField(default=datetime.datetime.now)
 
     class Meta:
         database = database
@@ -67,19 +88,23 @@ class Transaction(peewee.Model):
     def __unicode__(self):
         return '%s: %s' % (self.tag.title, self.title)
 
+    def total(self):
+        return self.select(
+            peewee.fn.Sum(SubTransaction.amount).alias("total")
+        ).join(SubTransaction)
+
 
 class SubTransaction(peewee.Model):
-    payer = peewee.ForeignKeyField(User)
     borrower = peewee.ForeignKeyField(User)
     transaction = peewee.ForeignKeyField(Transaction)
     amount = peewee.IntegerField()
-    accepted = peewee.BooleanField()
+    accepted = peewee.BooleanField(default=False)
 
     class Meta:
         database = database
 
     def __unicode__(self):
-        return '%s -> %s' % (self.payer.first_namse, self.borrower.first_name)
+        return '%s' % (self.amount)
 
 
 class TagTransaction(peewee.Model):
@@ -99,6 +124,7 @@ class TagUser(peewee.Model):
 
 
 def create_tables():
+    database.connect()
     User.create_table()
     Tag.create_table()
     Transaction.create_table()
