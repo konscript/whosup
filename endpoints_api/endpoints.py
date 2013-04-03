@@ -190,21 +190,25 @@ class WhosupApi(remote.Service):
                       http_method="GET"
                       )
     def get_group(self, request):
-        group = Tag.select(id=request.group_id)
+        group = Tag.get(Tag.id == request.group_id)
+
+        group_members = group.members()
 
         members = []
 
-        for member in group.members():
+        for member in group_members:
+            logging.info(member)
             members.append(
                 whosup_messages.UserResponse(
-                    user_id=member.facebook_id,
-                    email=member.email or "",
                     first_name=member.first_name,
-                    last_name=member.last_name
+                    last_name=member.last_name,
+                    facebook_id=member.user_id
                 )
             )
 
-        return whosup_messages.GroupResponse(group_id=1, title="test", members=[])
+        logging.info(members)
+
+        return whosup_messages.GroupResponse(group_id=group.id, title=group.title, members=members)
 
     @endpoints.method(whosup_messages.GroupResponse,
                       whosup_messages.GroupResponse,
@@ -213,7 +217,9 @@ class WhosupApi(remote.Service):
                       http_method="POST"
                       )
     def save_group(self, request):
-        tag = Tag.create(request.title)
+        tag = Tag.create(
+            title=request.title
+        )
 
         for member in request.members:
             member_user = User.get_or_create(
@@ -226,6 +232,8 @@ class WhosupApi(remote.Service):
                 tag=tag,
                 user=member_user
             )
+
+        request.group_id = tag.id
         return request
 
 

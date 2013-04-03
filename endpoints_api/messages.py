@@ -81,8 +81,7 @@ class GroupRequest(messages.Message):
 class GroupResponse(messages.Message):
     group_id = messages.IntegerField(1)
     title = messages.StringField(2)
-    balance = messages.IntegerField(3)
-    members = messages.MessageField(UserResponse, 4, repeated=True)
+    members = messages.MessageField(UserResponse, 3, repeated=True)
 
 
 class GroupsResponse(messages.Message):

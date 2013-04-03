@@ -1,5 +1,6 @@
 import peewee
 import datetime
+import logging
 
 database = peewee.MySQLDatabase('whosup', user='root', password='tismando')
 
@@ -66,9 +67,7 @@ class Tag(peewee.Model):
         database = database
 
     def members(self):
-        return TagUser.select(
-            User
-        ).join(Tag).switch(TagUser).join(User).where(Tag == self)
+        return TagUser.select(User).join(Tag).switch(TagUser).join(User).where(TagUser.tag == self)
 
     def balances(self):
         return TagUser.select(
