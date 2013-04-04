@@ -1,3 +1,6 @@
+python /srv/google_appengine/dev_appserver.py --host 0.0.0.0 --port 8081 --mysql_user=root --mysql_password=tismando /srv/www/whosup/endpoints_api/
+
+
 Pitch
 --------------------
 

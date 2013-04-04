@@ -8,11 +8,17 @@ angular.module('whosUp.directives', [])
         replace: true,
         transclude: true,
         link: function(scope, element, attrs) {
-            scope.$watch(attrs.list, function(value) {
+
+
+            scope.$watch(attrs.list, function(friends) {
                 $(element).autocomplete({
-                    source: value,
+                    source: friends.map(function(friend){
+                        friend.label = friend.name;
+                        friend.value = friend.id;
+                        return friend;
+                    }),
                     focus:function (event, ui) {
-                        element.val(ui.item.label);
+                        element.val(ui.item.name);
                         return false;
                     },
                     select:function (event, ui) {
@@ -28,8 +34,8 @@ angular.module('whosUp.directives', [])
                         }
                     }
                 }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-                    var image_url = "http://graph.facebook.com/" + item.value + "/picture";
-                    return $('<li><a><img ng-src="' + image_url + '" class="user-thumbnail"><span>' + item.label + '</span></a></li>').appendTo(ul);
+                    var image_url = "http://graph.facebook.com/" + item.id + "/picture";
+                    return $('<li><a><img src="' + image_url + '" class="user-thumbnail"><span>' + item.name + '</span></a></li>').appendTo(ul);
                 };
             });
         }

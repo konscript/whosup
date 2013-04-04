@@ -1,9 +1,9 @@
 from google.appengine.ext import endpoints
 from protorpc import remote
 from protorpc import message_types
-import messages as whosup_messages
-from google.appengine.api import rdbms
+#import messages as whosup_messages
 
+from messages import FaceBookUserMessage, UserBalanceRequest, UserBalanceResponse, TransactionsRequest, TransactionsResponse, TransactionRequest, BalancesRequest, BalancesResponse, BalanceResponse, GroupsResponse, GroupsRequest, GroupRequest, GroupResponse
 from models import User, Transaction, SubTransaction, Tag, TagTransaction, TagUser
 
 import decimal
@@ -21,24 +21,14 @@ dthandler = lambda obj: int(obj) if isinstance(obj, decimal.Decimal) else obj
                description='API for whosup !',
                allowed_client_ids=[CLIENT_ID, endpoints.API_EXPLORER_CLIENT_ID])
 class WhosupApi(remote.Service):
-    @endpoints.method(whosup_messages.UserBalanceRequest,
-                      whosup_messages.UserBalanceResponse,
+    @endpoints.method(UserBalanceRequest,
+                      UserBalanceResponse,
                       name='balance',
                       path="balance",
                       http_method="GET"
                       )
     def get_user_balance(self, request):
-        user = User.get_or_create(
-            facebook_id=request.id,
-            first_name=request.first_name,
-            last_name=request.last_name,
-            middle_name=request.middle_name,
-            link=request.link,
-            username=request.username,
-            gender=request.gender,
-            email=request.email,
-            locale=request.locale
-        )
+        user = get_or_create_user(request.user)
 
         balance = user.balance()
 
@@ -47,42 +37,32 @@ class WhosupApi(remote.Service):
         else:
             balance = 0
 
-        return whosup_messages.UserBalanceResponse(balance=balance)
+        return UserBalanceResponse(balance=balance)
 
-    @endpoints.method(whosup_messages.TransactionsRequest,
-                      whosup_messages.TransactionsResponse,
+    @endpoints.method(TransactionsRequest,
+                      TransactionsResponse,
                       name='transactions.list',
                       path="transactions",
                       http_method="GET"
                       )
     def get_transactions(self, request):
-        return whosup_messages.TransactionsResponse()
+        return TransactionsResponse()
 
-    @endpoints.method(whosup_messages.TransactionRequest,
+    @endpoints.method(TransactionRequest,
                       message_types.VoidMessage,
                       name='transaction.insert',
                       path="transaction",
                       http_method="POST"
                       )
     def save_transaction(self, request):
-        user = User.get_or_create(
-            facebook_id=request.payer.id,
-            first_name=request.payer.first_name,
-            last_name=request.payer.last_name,
-            middle_name=request.payer.middle_name,
-            link=request.payer.link,
-            username=request.payer.username,
-            gender=request.payer.gender,
-            email=request.payer.email,
-            locale=request.payer.locale
-        )
+        user = get_or_create_user(request.payer)
 
         transaction = Transaction.create(
             title=request.title,
             payer=user
         )
 
-        if request.tags and len(request.tags) > 0:
+        if hasattr(request, "tags") and len(request.tags) > 0:
             for tag in request.tags:
                 tag = Tag.get_or_create(
                     title=tag.title,
@@ -95,13 +75,7 @@ class WhosupApi(remote.Service):
                 )
 
         for sub_transaction in request.subTransactions:
-            borrower_name = sub_transaction.borrower_name.split(" ")
-
-            sub_user = User.get_or_create(
-                first_name=borrower_name[0],
-                last_name=borrower_name[1],
-                facebook_id=sub_transaction.borrower_id
-            )
+            sub_user = get_or_create_user(sub_transaction.borrower)
 
             SubTransaction.create(
                 borrower=sub_user,
@@ -111,80 +85,71 @@ class WhosupApi(remote.Service):
 
         return message_types.VoidMessage()
 
-    @endpoints.method(whosup_messages.BalancesRequest,
-                      whosup_messages.BalancesResponse,
+    @endpoints.method(BalancesRequest,
+                      BalancesResponse,
                       name='groupbalances.list',
                       path="groupbalances",
                       http_method="GET"
                       )
     def get_group_balances(self, request):
-        user = User.get_or_create(
-            facebook_id=request.id,
-            first_name=request.first_name,
-            last_name=request.last_name,
-            middle_name=request.middle_name,
-            link=request.link,
-            username=request.username,
-            gender=request.gender,
-            email=request.email,
-            locale=request.locale
-        )
+        user = get_or_create_user(request.user)
 
         tag_balances = user.tag_balances()
 
-        if len(tag_balances.count()) > 0:
+        if tag_balances.count() > 0:
+            logging.info("TAG BALANCES FOUND !! weee :)")
             tag_balances = [
-                whosup_messages.BalanceResponse(
-                    payer_id=balance["user_id"],
-                    borrower_id=balance["group_id"],
-                    balance=balance["balance"]
+                BalanceResponse(
+                    payer=FaceBookUserMessage(id=1),
+                    borrower=FaceBookUserMessage(id=2),
+                    balance=int(balance.balance)
                 )
                 for balance in tag_balances
             ]
         else:
             tag_balances = []
 
-        return whosup_messages.BalancesResponse(group_balances=tag_balances)
+        logging.info(tag_balances)
 
-    @endpoints.method(whosup_messages.BalancesRequest,
-                      whosup_messages.BalancesResponse,
+        return BalancesResponse(group_balances=tag_balances)
+
+    @endpoints.method(BalancesRequest,
+                      BalancesResponse,
                       name='userbalances.list',
                       path="userbalances",
                       http_method="GET"
                       )
     def get_user_balances(self, request):
+        user = get_or_create_user(request.user)
 
-        conn = rdbms.connect(instance="", database='whosup')
-        balances = []
-        cursor = conn.cursor()
+        user_balances = user.balance_against()
 
-        #Get balances
-        cursor.execute("SELECT * FROM balances WHERE payer_id='%s' OR borrower_id='%s'" % (request.user_id, request.user_id))
+        if user_balances.count() > 0:
+            user_balances = [
+                BalanceResponse(
+                    payer=FaceBookUserMessage(id=1),
+                    borrower=FaceBookUserMessage(id=2),
+                    balance=int(balance.balance)
+                )
+                for balance in user_balances
+            ]
+        else:
+            user_balances = []
 
-        for row in cursor.fetchall():
-            balance = {}
-            for index, column in enumerate(row):
-                balance[cursor.description[index][0]] = (int(column) if not isinstance(column, basestring) else column.decode("latin-1")) if column else None
-            balances.append(balance)
+        return BalancesResponse(balances=user_balances)
 
-        conn.close()
-
-        balances = [whosup_messages.BalanceResponse(payer_id=balance["payer_id"], borrower_id=balance["borrower_id"], balance=balance["balance"]) for balance in balances]
-
-        return whosup_messages.BalancesResponse(balances=balances)
-
-    @endpoints.method(whosup_messages.GroupsRequest,
-                      whosup_messages.GroupsResponse,
+    @endpoints.method(GroupsRequest,
+                      GroupsResponse,
                       name='groups.list',
                       path="groups",
                       http_method="GET"
                       )
     def get_groups(self, request):
         groups = []
-        return whosup_messages.GroupsResponse(groups=groups)
+        return GroupsResponse(groups=groups)
 
-    @endpoints.method(whosup_messages.GroupRequest,
-                      whosup_messages.GroupResponse,
+    @endpoints.method(GroupRequest,
+                      GroupResponse,
                       name='group',
                       path="group",
                       http_method="GET"
@@ -197,21 +162,19 @@ class WhosupApi(remote.Service):
         members = []
 
         for member in group_members:
-            logging.info(member)
             members.append(
-                whosup_messages.UserResponse(
+                FaceBookUserMessage(
                     first_name=member.first_name,
                     last_name=member.last_name,
-                    facebook_id=member.user_id
+                    facebook_id=member.facebook_id,
+                    id=member.facebook_id
                 )
             )
 
-        logging.info(members)
+        return GroupResponse(group_id=group.id, title=group.title, members=members)
 
-        return whosup_messages.GroupResponse(group_id=group.id, title=group.title, members=members)
-
-    @endpoints.method(whosup_messages.GroupResponse,
-                      whosup_messages.GroupResponse,
+    @endpoints.method(GroupResponse,
+                      GroupResponse,
                       name='group.insert',
                       path="group",
                       http_method="POST"
@@ -222,11 +185,7 @@ class WhosupApi(remote.Service):
         )
 
         for member in request.members:
-            member_user = User.get_or_create(
-                first_name=member.first_name,
-                last_name=member.last_name,
-                facebook_id=member.user_id
-            )
+            member_user = get_or_create_user(member)
 
             TagUser.get_or_create(
                 tag=tag,
@@ -235,6 +194,29 @@ class WhosupApi(remote.Service):
 
         request.group_id = tag.id
         return request
+
+
+def get_or_create_user(user):
+    if hasattr(user, "facebook_id") and user.facebook_id != user.id:
+        user.id = user.facebook_id
+
+    user = User.get(User.facebook_id == user.id)
+
+    if not user:
+        user = User.create(
+            facebook_id=user.id,
+            name=user.name or "",
+            first_name=user.first_name or "",
+            last_name=user.last_name or "",
+            middle_name=user.middle_name or "",
+            link=user.link or "",
+            username=user.username or "",
+            gender=user.gender or "",
+            email=user.email or "",
+            locale=user.locale or ""
+        )
+
+    return user
 
 
 APPLICATION = endpoints.api_server([WhosupApi], restricted=False)

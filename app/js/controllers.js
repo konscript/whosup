@@ -3,12 +3,13 @@
 function BalancesCtrl($scope, $rootScope, facebookConnect) {
 
     // make sure we're logged in via facebook and have user info available
-    $rootScope.$watch('[facebookInit, endpointsInit]',
-        function(ready){
-            if(ready[0] && ready[1]){
-                facebookConnect.me(function(facebookUser){
-                    gapi.client.whosup.balances.list(facebookUser).execute(function(data){
-                        // iterate through and set class whether balance is in minus or plus
+    $rootScope.apisReady.then(function(promises){
+        facebookConnect.me(function(facebookUser){
+            var rpcBatch = gapi.client.newRpcBatch();
+            rpcBatch.add(gapi.client.whosup.userbalances.list({user: facebookUser}), {
+                callback:function(data){
+                    // iterate through and set class whether balance is in minus or plus
+                    if(data.balances){
                         $.each(data.balances, function(index, value) {
                             if (value.balance > 0) {
                                 value.klass = "amount-plus";
@@ -18,6 +19,19 @@ function BalancesCtrl($scope, $rootScope, facebookConnect) {
                                 value.klass = "amount-minus";
                             }
                         });
+                        $scope.balances = data.balances;
+                    }
+                }
+            });
+
+            rpcBatch.execute(function(){
+                $scope.$apply();
+            });
+
+            var rpcBatch2 = gapi.client.newRpcBatch();
+            rpcBatch2.add(gapi.client.whosup.groupbalances.list({user: facebookUser}), {
+                callback:function(data){
+                    if(data.group_balances){
                         $.each(data.group_balances, function(index, value) {
                             if (value.balance > 0) {
                                 value.klass = "amount-plus";
@@ -27,13 +41,16 @@ function BalancesCtrl($scope, $rootScope, facebookConnect) {
                                 value.klass = "amount-minus";
                             }
                         });
-                        $scope.balances = data.balances;
                         $scope.groupBalances = data.group_balances;
-                        $scope.$apply();
-                    });
-                });
-            }
-        }, true);
+                    }
+                }
+            });
+
+            rpcBatch2.execute(function(){
+                $scope.$apply();
+            });
+        });
+        });
 }
 
 function GroupBalancesCtrl($scope, $routeParams) {
@@ -55,7 +72,7 @@ function GroupBalancesCtrl($scope, $routeParams) {
     });
 }
 
-function NewCtrl($scope, $location, $rootScope, $routeParams, facebookConnect) {
+function NewTransactionCtrl($scope, $location, $rootScope, $routeParams, facebookConnect) {
 
     $scope.availableUsers = [];
     $scope.groups = [];
@@ -65,43 +82,37 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, facebookConnect) {
         title: "",
         total_amount: "",
         group_id: undefined,
-        payer_id: "",
+        payer: {},
         subTransactions: []
     };
 
-    $rootScope.$watch("[facebookInit, endpointsInit]", function(ready){
-        if(ready[0] && ready[1]){
+    $rootScope.apisReady.then(function(){
+        console.log($rootScope.apisReady);
+        console.log("apisReady");
+        //Get facebook friends
+        facebookConnect.getFriends(function(users){
+            $scope.availableUsers = users;
+            $scope.$apply();
+        });
 
-            //Get facebook friends
-            facebookConnect.getFriends(function(tokens){
-                $scope.availableUsers = tokens.data.map(function(token){
-                    return {
-                        value: token.id,
-                        label: token.name
-                    };
-                });
+        //Get facebook profile
+        facebookConnect.me(function(user){
+            //Set payer id
+            $scope.transaction.payer = user;
+
+            //Automatically add user to transaction
+            $scope.transaction.subTransactions.push({
+                borrower: user
+            });
+
+            console.log($scope.transaction);
+            //Get users group
+            gapi.client.whosup.groups.list({user_id: user.id}).execute(function(data){
+                $scope.groups = data.groups;
                 $scope.$apply();
             });
-
-            //Get facebook profile
-            facebookConnect.me(function(user){
-                //Set payer id
-                $scope.transaction.payer = user;
-
-                //Automatically add user to transaction
-                $scope.transaction.subTransactions.push({
-                    borrower_id: user.id,
-                    borrower_name: user.first_name + ' ' + user.last_name
-                });
-
-                //Get users group
-                gapi.client.whosup.groups.list({user_id: user.id}).execute(function(data){
-                    $scope.groups = data.groups;
-                    $scope.$apply();
-                });
-            });
-        }
-    }, true);
+        });
+    });
 
     //Updates the calculated amounts of people that splits the remainder
     $scope.updateAmounts = function(){
@@ -137,6 +148,7 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, facebookConnect) {
         });
         gapi.client.whosup.transaction.insert($scope.transaction).execute(function(response){
             $location.path( "/main" );
+            $scope.$apply();
         });
     };
 
@@ -150,10 +162,9 @@ function NewCtrl($scope, $location, $rootScope, $routeParams, facebookConnect) {
     };
 
     //Add e friend to sub transactions
-    $scope.addUser = function(item){
+    $scope.addUser = function(user){
         $scope.transaction.subTransactions.push({
-            borrower_id: item.value,
-            borrower_name: item.label
+            borrower: user
         });
         $scope.updateAmounts();
         $scope.$apply();
@@ -172,21 +183,13 @@ function NewGroupCtrl($scope, $location, $rootScope, $routeParams, facebookConne
         if(ready[0] && ready[1]){
 
             //Get friends
-            facebookConnect.getFriends(function(tokens){
-                $scope.availableUsers = tokens.data.map(function(token){
-                    return {
-                        value: token.id,
-                        label: token.name
-                    };
-                });
+            facebookConnect.getFriends(function(users){
+                $scope.availableUsers = users;
                 $scope.$apply();
             });
 
             //If group exists
             if($routeParams.id !== ""){
-                console.log("GROUP FOUND");
-                console.log(gapi.client.whosup.group);
-
                 gapi.client.whosup.group({group_id: Number($routeParams.id)}).execute(function(data){
                     console.log("WTF");
                     console.log(data);
@@ -202,10 +205,7 @@ function NewGroupCtrl($scope, $location, $rootScope, $routeParams, facebookConne
             //If new group
             }else{
                 facebookConnect.me(function(user){
-                    $scope.addUser({
-                        value: user.id,
-                        label: user.first_name + ' ' + user.last_name
-                    });
+                    $scope.addUser(user);
                     $scope.$apply();
                 });
             }
@@ -221,14 +221,8 @@ function NewGroupCtrl($scope, $location, $rootScope, $routeParams, facebookConne
         });
     };
 
-    $scope.addUser = function(item){
-        var splitName = item.label.split(" ");
-        $scope.group.members.push({
-            user_id: item.value,
-            first_name: splitName[0],
-            last_name: splitName[1],
-            user_name: item.label
-        });
+    $scope.addUser = function(user){
+        $scope.group.members.push(user);
 
     };
 
