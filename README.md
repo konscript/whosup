@@ -1,4 +1,20 @@
+Install mysql
+create database whosup
+change username and password (this needs to be put into settings or are they there already somewhere :) ? since they are in the dev_appserver args)
+
+
+Run api server
 python /srv/google_appengine/dev_appserver.py --host 0.0.0.0 --port 8081 --mysql_user=root --mysql_password=tismando /srv/www/whosup/endpoints_api/
+
+fire up the appengine admin
+http://localhost:8000
+
+go to the console
+
+write:
+from models import create_tables
+
+create_tables()
 
 
 Pitch
