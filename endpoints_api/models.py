@@ -2,7 +2,7 @@ import peewee
 import datetime
 import logging
 
-database = peewee.MySQLDatabase('whosup', user='root', password='tismando')
+database = peewee.MySQLDatabase('whosup', user='root', passwd='tismando', threadlocals=True)
 
 
 class User(peewee.Model):
@@ -37,18 +37,27 @@ class User(peewee.Model):
             return User.select(
                 SubTransaction.borrower.alias("payer"),
                 SubTransaction.borrower.alias("borrower"),
-                peewee.fn.Sum(SubTransaction.amount).alias("balance")
+                peewee.fn.Sum(SubTransaction.amount).alias("balance"),
+                User.select(peewee.fn.Sum(SubTransaction.amount)).join(SubTransaction).join(Transaction).where(
+                    ((SubTransaction.payer == user) & (SubTransaction.payer == self))
+                ).alias("balance_against")
             ).join(SubTransaction).join(Transaction).where(
-                ((SubTransaction.payer == user) & (SubTransaction.payer == self)) | ((SubTransaction.payer == self) & (SubTransaction.payer == user))
+                ((SubTransaction.payer == self) & (SubTransaction.payer == user))
             )
         else:
-            return User.select(
-                Transaction.payer.alias("payer"),
-                SubTransaction.borrower.alias("borrower"),
-                peewee.fn.Sum(SubTransaction.amount).alias("balance")
+            query = User.select(
+                User,
+                peewee.fn.Sum(SubTransaction.amount).alias("balance"),
+                User.select(peewee.fn.Sum(SubTransaction.amount)).join(SubTransaction).join(Transaction).where(
+                    (SubTransaction.borrower == self) & (Transaction.payer == peewee.R("t1.`id`"))
+                ).alias("balance_against")
             ).join(SubTransaction).join(Transaction).where(
-                (Transaction.payer == self) | (SubTransaction.borrower == self)
+                (Transaction.payer == self) & (SubTransaction.borrower != self)
             ).group_by(SubTransaction.borrower)
+
+            logging.info(query)
+
+            return query
 
     def tag_balances(self, tag=None):
         query = TagTransaction.select(

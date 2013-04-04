@@ -14,10 +14,6 @@ app.run(function($rootScope, $q) {
     //Set User Balance
     $rootScope.userBalance = 0;
 
-    //Create deferreds
-    var facebookDeferred = $q.defer();
-    var endpointsDeferred = $q.defer();
-
     //Initialize facebook
     FB.init({
         appId      : '191611900970322', // App ID
@@ -27,32 +23,40 @@ app.run(function($rootScope, $q) {
         xfbml      : false  // parse XFBML
     });
 
-    //Login to facebook
-    FB.login(function(response) {
-        if (response.authResponse) {
-            facebookDeferred.resolve("Logged in to facebook");
-        } else {
-            facebookDeferred.reject('User cancelled login or did not fully authorize.');
-        }
-        $rootScope.$apply();
-    }, {scope: 'email, publish_checkins'});
+    //Promise for facebook login
+    function facebookPromise(){
+        var facebookDeferred = $q.defer();
 
-    //Load the api
-    gapi.client.load('whosup', 'v1', function(response){
-        console.log(response);
-        if(response && response.error){
-            endpointsDeferred.reject("Endpoints failed: " + response.error.message);
-        }else{
-            endpointsDeferred.resolve("Endpoints loadet");
-        }
-        $rootScope.$apply();
-    }, 'http://' + window.location.host + ':8081/_ah/api');
+        //Login to facebook
+        FB.login(function(response) {
+            if (response.authResponse) {
+                facebookDeferred.resolve("Logged in to facebook");
+            } else {
+                facebookDeferred.reject('User cancelled login or did not fully authorize.');
+            }
+            $rootScope.$apply();
+        }, {scope: 'email, publish_checkins'});
+        return facebookDeferred.promise;
+    }
 
+    //Promise for endpoints loaded
+    function endpointsPromise(){
+        var endpointsDeferred = $q.defer();
 
-    var facebookPromise = facebookDeferred.promise;
-    var enpointsPromise = endpointsDeferred.promise;
+        //Load the api
+        gapi.client.load('whosup', 'v1', function(response){
+            console.log(response);
+            if(response && response.error){
+                endpointsDeferred.reject("Endpoints failed: " + response.error.message);
+            }else{
+                endpointsDeferred.resolve("Endpoints loadet");
+            }
+            $rootScope.$apply();
+        }, 'http://' + window.location.host + ':8081/_ah/api');
+        return endpointsDeferred.promise;
+    }
 
-    $rootScope.apisReady = $q.all([facebookDeferred.promise, endpointsDeferred.promise]);
+    $rootScope.apisReady = $q.all([facebookPromise(), endpointsPromise()]);
 
     $rootScope.apisReady.then(function(promises){
         FB.api('/me', function(facebookUser){

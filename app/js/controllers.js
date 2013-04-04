@@ -9,8 +9,8 @@ function BalancesCtrl($scope, $rootScope, facebookConnect) {
             rpcBatch.add(gapi.client.whosup.userbalances.list({user: facebookUser}), {
                 callback:function(data){
                     // iterate through and set class whether balance is in minus or plus
-                    if(data.balances){
-                        $.each(data.balances, function(index, value) {
+                    if(data.result.balances){
+                        $.each(data.result.balances, function(index, value) {
                             if (value.balance > 0) {
                                 value.klass = "amount-plus";
                             } else if (value.balance === 0) {
@@ -19,7 +19,7 @@ function BalancesCtrl($scope, $rootScope, facebookConnect) {
                                 value.klass = "amount-minus";
                             }
                         });
-                        $scope.balances = data.balances;
+                        $scope.balances = data.result.balances;
                     }
                 }
             });
@@ -31,8 +31,8 @@ function BalancesCtrl($scope, $rootScope, facebookConnect) {
             var rpcBatch2 = gapi.client.newRpcBatch();
             rpcBatch2.add(gapi.client.whosup.groupbalances.list({user: facebookUser}), {
                 callback:function(data){
-                    if(data.group_balances){
-                        $.each(data.group_balances, function(index, value) {
+                    if(data.result.group_balances){
+                        $.each(data.result.group_balances, function(index, value) {
                             if (value.balance > 0) {
                                 value.klass = "amount-plus";
                             } else if (value.balance === 0) {
@@ -41,7 +41,7 @@ function BalancesCtrl($scope, $rootScope, facebookConnect) {
                                 value.klass = "amount-minus";
                             }
                         });
-                        $scope.groupBalances = data.group_balances;
+                        $scope.groupBalances = data.result.group_balances;
                     }
                 }
             });

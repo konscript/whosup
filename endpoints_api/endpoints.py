@@ -98,6 +98,10 @@ class WhosupApi(remote.Service):
 
         if tag_balances.count() > 0:
             logging.info("TAG BALANCES FOUND !! weee :)")
+
+            for balance in tag_balances:
+                logging.info(balance.balance)
+
             tag_balances = [
                 BalanceResponse(
                     payer=FaceBookUserMessage(id=1),
@@ -125,10 +129,14 @@ class WhosupApi(remote.Service):
         user_balances = user.balance_against()
 
         if user_balances.count() > 0:
+            for balance in user_balances:
+
+                logging.info("balance %s: %s-%s = %s" % (balance.first_name, balance.balance_against, balance.balance, balance.balance_against or 0 - balance.balance or 0))
+
             user_balances = [
                 BalanceResponse(
-                    payer=FaceBookUserMessage(id=1),
-                    borrower=FaceBookUserMessage(id=2),
+                    payer=request.user,
+                    borrower=FaceBookUserMessage(id=int(balance.facebook_id), first_name=balance.first_name, last_name=balance.last_name),
                     balance=int(balance.balance)
                 )
                 for balance in user_balances

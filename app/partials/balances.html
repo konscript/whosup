@@ -1,10 +1,26 @@
 <div class="row padded">
-    <div class="small-12 columns">Groups you have balances in</div>
+    <div class="small-12 columns">Balances</div>
 </div>
 <table class="row small-12 columns balances-table">
+    <tr>
+        <td>
+            <h2>
+                Friends
+            </h2>
+        </td>
+    </tr>
     <tr ng-repeat="balance in balances">
-        <td class="title"><a href="#/balances/{{ balance.borrower_id }}">{{ balance.group.title }}</a></td>
+        <td class="title">
+            <a href="#/balances/{{ balance.borrower.facebook_id }}">
+            <img ng-src="http://graph.facebook.com/{{ balance.borrower.id }}/picture" class="user-thumbnail"/>{{ balance.borrower.first_name }} {{ balance.borrower.last_name }}</a></td>
         <td class="amount {{ balance.klass }}">{{ balance.balance }}</td>
+    </tr>
+    <tr>
+        <td>
+            <h2>
+                Groups
+            </h2>
+        </td>
     </tr>
     <tr ng-repeat="balance in groupBalances">
         <td class="title"><a href="#/group-balances/{{ balance.group.id }}">{{ balance.group.title }}</a></td>
