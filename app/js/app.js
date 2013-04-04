@@ -36,6 +36,7 @@ app.run(function($rootScope, $q) {
             }
             $rootScope.$apply();
         }, {scope: 'email, publish_checkins'});
+
         return facebookDeferred.promise;
     }
 
@@ -53,6 +54,7 @@ app.run(function($rootScope, $q) {
             }
             $rootScope.$apply();
         }, 'http://' + window.location.host + ':8081/_ah/api');
+
         return endpointsDeferred.promise;
     }
 

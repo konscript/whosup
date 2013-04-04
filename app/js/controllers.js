@@ -86,7 +86,7 @@ function NewTransactionCtrl($scope, $location, $rootScope, $routeParams, faceboo
         subTransactions: []
     };
 
-    $rootScope.apisReady.then(function(){
+    $rootScope.apisReady.then(function(promises){
         console.log($rootScope.apisReady);
         console.log("apisReady");
         //Get facebook friends
@@ -171,7 +171,7 @@ function NewTransactionCtrl($scope, $location, $rootScope, $routeParams, faceboo
     };
 }
 
-function NewGroupCtrl($scope, $location, $rootScope, $routeParams, facebookConnect){
+function NewGroupCtrl($scope, $location, $rootScope, $routeParams, $q, facebookConnect){
     $scope.availableUsers = [];
     $scope.group = {
         title: null,
@@ -179,39 +179,33 @@ function NewGroupCtrl($scope, $location, $rootScope, $routeParams, facebookConne
         members: []
     };
 
-    $rootScope.$watch("[facebookInit, endpointsInit]", function(ready){
-        if(ready[0] && ready[1]){
+    $rootScope.apisReady.then(function(promises){
 
-            //Get friends
-            facebookConnect.getFriends(function(users){
-                $scope.availableUsers = users;
+        //Get friends
+        facebookConnect.getFriends(function(users){
+            $scope.availableUsers = users;
+        });
+
+        //If group exists
+        if($routeParams.id !== ""){
+            gapi.client.whosup.group({group_id: Number($routeParams.id)}).execute(function(data){
+                $scope.group.group_id = data.group_id;
+                $scope.group.title = data.title;
+                $.each(data.members, function(index, member){
+                    member.user_name = member.first_name + " " + member.last_name;
+                    $scope.group.members.push(member);
+                });
                 $scope.$apply();
             });
 
-            //If group exists
-            if($routeParams.id !== ""){
-                gapi.client.whosup.group({group_id: Number($routeParams.id)}).execute(function(data){
-                    console.log("WTF");
-                    console.log(data);
-                    $scope.group.group_id = data.group_id;
-                    $scope.group.title = data.title;
-                    $.each(data.members, function(index, member){
-                        member.user_name = member.first_name + " " + member.last_name;
-                        $scope.group.members.push(member);
-                    });
-                    $scope.$apply();
-                });
-
-            //If new group
-            }else{
-                facebookConnect.me(function(user){
-                    $scope.addUser(user);
-                    $scope.$apply();
-                });
-            }
-
+        //If new group
+        }else{
+            facebookConnect.me(function(user){
+                $scope.addUser(user);
+                $scope.$apply();
+            });
         }
-    }, true);
+    });
 
     $scope.removeUser = function(userId) {
         $.each($scope.group.members, function(index, member){

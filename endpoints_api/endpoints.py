@@ -3,7 +3,7 @@ from protorpc import remote
 from protorpc import message_types
 #import messages as whosup_messages
 
-from messages import FaceBookUserMessage, UserBalanceRequest, UserBalanceResponse, TransactionsRequest, TransactionsResponse, TransactionRequest, BalancesRequest, BalancesResponse, BalanceResponse, GroupsResponse, GroupsRequest, GroupRequest, GroupResponse
+from messages import FaceBookUserMessage, UserBalanceRequest, GroupBalanceResponse, UserBalanceResponse, TransactionsRequest, TransactionsResponse, TransactionRequest, BalancesRequest, BalancesResponse, BalanceResponse, GroupsResponse, GroupsRequest, GroupRequest, GroupResponse
 from models import User, Transaction, SubTransaction, Tag, TagTransaction, TagUser
 
 import decimal
@@ -97,20 +97,20 @@ class WhosupApi(remote.Service):
         tag_balances = user.tag_balances()
 
         if tag_balances.count() > 0:
-            logging.info("TAG BALANCES FOUND !! weee :)")
+            logging.info("Wee found tags")
 
             for balance in tag_balances:
                 logging.info(balance.balance)
 
             tag_balances = [
-                BalanceResponse(
-                    payer=FaceBookUserMessage(id=1),
-                    borrower=FaceBookUserMessage(id=2),
-                    balance=int(balance.balance)
+                GroupBalanceResponse(
+                    group=GroupResponse(group_id=balance.id, title=balance.title),
+                    balance=int(balance.balance or 0) - int(balance.balance_against or 0)
                 )
                 for balance in tag_balances
             ]
         else:
+            logging.info("Wee, no found tags")
             tag_balances = []
 
         logging.info(tag_balances)
@@ -129,15 +129,11 @@ class WhosupApi(remote.Service):
         user_balances = user.balance_against()
 
         if user_balances.count() > 0:
-            for balance in user_balances:
-
-                logging.info("balance %s: %s-%s = %s" % (balance.first_name, balance.balance_against, balance.balance, balance.balance_against or 0 - balance.balance or 0))
-
             user_balances = [
                 BalanceResponse(
                     payer=request.user,
                     borrower=FaceBookUserMessage(id=int(balance.facebook_id), first_name=balance.first_name, last_name=balance.last_name),
-                    balance=int(balance.balance)
+                    balance=int(balance.balance or 0) - int(balance.balance_against or 0)
                 )
                 for balance in user_balances
             ]
@@ -174,8 +170,7 @@ class WhosupApi(remote.Service):
                 FaceBookUserMessage(
                     first_name=member.first_name,
                     last_name=member.last_name,
-                    facebook_id=member.facebook_id,
-                    id=member.facebook_id
+                    id=int(member.facebook_id)
                 )
             )
 

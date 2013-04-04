@@ -45,7 +45,7 @@ class User(peewee.Model):
                 ((SubTransaction.payer == self) & (SubTransaction.payer == user))
             )
         else:
-            query = User.select(
+            return User.select(
                 User,
                 peewee.fn.Sum(SubTransaction.amount).alias("balance"),
                 User.select(peewee.fn.Sum(SubTransaction.amount)).join(SubTransaction).join(Transaction).where(
@@ -55,22 +55,20 @@ class User(peewee.Model):
                 (Transaction.payer == self) & (SubTransaction.borrower != self)
             ).group_by(SubTransaction.borrower)
 
-            logging.info(query)
-
-            return query
-
     def tag_balances(self, tag=None):
-        query = TagTransaction.select(
+        query = Tag.select(
+            Tag.id,
             Tag.title,
-            peewee.fn.Sum(SubTransaction.amount).alias("balance")
-        ).join(Transaction).join(SubTransaction).switch(TagTransaction).join(Tag).where(
-            ((Transaction.payer == self) & (SubTransaction.borrower != self)) | ((SubTransaction.borrower == self) & (Transaction.payer != self))
-        )
+            SubTransaction.select(peewee.fn.Sum(SubTransaction.amount)).join(Transaction).join(TagTransaction).where(SubTransaction.borrower != self & Transaction.payer == self & TagTransaction.tag == Tag.id).alias("balance"),
+            SubTransaction.select(peewee.fn.Sum(SubTransaction.amount)).join(Transaction).join(TagTransaction).where(SubTransaction.borrower == self & Transaction.payer != self & TagTransaction.tag == Tag.id).alias("balance_against")
+        ).join(TagUser).where(
+            (TagUser.user == self)
+        ).group_by(Tag)
 
         if tag:
             query.where(Tag.id == tag)
 
-        query.group_by(Tag)
+        logging.info(query)
 
         return query
 
