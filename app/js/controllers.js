@@ -81,14 +81,12 @@ function NewTransactionCtrl($scope, $location, $rootScope, $routeParams, faceboo
     $scope.transaction = {
         title: "",
         total_amount: "",
-        group_id: undefined,
+        group: undefined,
         payer: {},
         subTransactions: []
     };
 
     $rootScope.apisReady.then(function(promises){
-        console.log($rootScope.apisReady);
-        console.log("apisReady");
         //Get facebook friends
         facebookConnect.getFriends(function(users){
             $scope.availableUsers = users;
@@ -96,19 +94,18 @@ function NewTransactionCtrl($scope, $location, $rootScope, $routeParams, faceboo
         });
 
         //Get facebook profile
-        facebookConnect.me(function(user){
+        facebookConnect.me(function(facebookUser){
             //Set payer id
-            $scope.transaction.payer = user;
+            $scope.transaction.payer = facebookUser;
 
             //Automatically add user to transaction
             $scope.transaction.subTransactions.push({
-                borrower: user
+                borrower: facebookUser
             });
 
-            console.log($scope.transaction);
             //Get users group
-            gapi.client.whosup.groups.list({user_id: user.id}).execute(function(data){
-                $scope.groups = data.groups;
+            gapi.client.whosup.groupbalances.list({user: facebookUser}).execute(function(data){
+                $scope.groups = data.result.group_balances;
                 $scope.$apply();
             });
         });
@@ -146,6 +143,7 @@ function NewTransactionCtrl($scope, $location, $rootScope, $routeParams, faceboo
                 delete subTransaction.split_amount;
             }
         });
+
         gapi.client.whosup.transaction.insert($scope.transaction).execute(function(response){
             $location.path( "/main" );
             $scope.$apply();
@@ -168,6 +166,27 @@ function NewTransactionCtrl($scope, $location, $rootScope, $routeParams, faceboo
         });
         $scope.updateAmounts();
         $scope.$apply();
+    };
+
+    //Change group
+    $scope.changeGroup = function(){
+        console.log($scope.transaction.group);
+        if($scope.transaction.group){
+            //Get users group
+            gapi.client.whosup.group({group_id: $scope.transaction.group.group.group_id}).execute(function(data){
+                $scope.transaction.subTransactions = $.map(data.result.members, function(user){
+                    return {
+                        borrower: user
+                    };
+                });
+                $scope.updateAmounts();
+                $scope.$apply();
+            });
+        }else{
+            $scope.transaction.subTransactions = [{borrower: $scope.transaction.payer}];
+            $scope.updateAmounts();
+            $scope.$apply();
+        }
     };
 }
 

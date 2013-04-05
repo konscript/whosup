@@ -28,21 +28,9 @@ class SubTransaction(messages.Message):
     amount = messages.IntegerField(2, required=True)
 
 
-class TransactionRequest(messages.Message):
-    title = messages.StringField(1, required=True)
-    payer = messages.MessageField(FaceBookUserMessage, 2, required=True)
-    group = messages.IntegerField(3)
-    total_amount = messages.IntegerField(4, required=True)
-    subTransactions = messages.MessageField(SubTransaction, 5, repeated=True)
-
-
 class TransactionsRequest(messages.Message):
     payer = messages.MessageField(FaceBookUserMessage, 1)
     group_id = messages.IntegerField(2)
-
-
-class TransactionsResponse(messages.Message):
-    transactions = messages.MessageField(TransactionRequest, 1, repeated=True)
 
 
 class BalancesRequest(messages.Message):
@@ -86,3 +74,15 @@ class GroupBalanceResponse(messages.Message):
 class BalancesResponse(messages.Message):
     balances = messages.MessageField(BalanceResponse, 1, repeated=True)
     group_balances = messages.MessageField(GroupBalanceResponse, 2, repeated=True)
+
+
+class TransactionRequest(messages.Message):
+    title = messages.StringField(1, required=True)
+    payer = messages.MessageField(FaceBookUserMessage, 2, required=True)
+    group = messages.MessageField(GroupBalanceResponse, 3)
+    total_amount = messages.IntegerField(4, required=True)
+    subTransactions = messages.MessageField(SubTransaction, 5, repeated=True)
+
+
+class TransactionsResponse(messages.Message):
+    transactions = messages.MessageField(TransactionRequest, 1, repeated=True)

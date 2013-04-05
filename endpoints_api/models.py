@@ -59,16 +59,14 @@ class User(peewee.Model):
         query = Tag.select(
             Tag.id,
             Tag.title,
-            SubTransaction.select(peewee.fn.Sum(SubTransaction.amount)).join(Transaction).join(TagTransaction).where(SubTransaction.borrower != self & Transaction.payer == self & TagTransaction.tag == Tag.id).alias("balance"),
-            SubTransaction.select(peewee.fn.Sum(SubTransaction.amount)).join(Transaction).join(TagTransaction).where(SubTransaction.borrower == self & Transaction.payer != self & TagTransaction.tag == Tag.id).alias("balance_against")
+            SubTransaction.select(peewee.fn.Sum(SubTransaction.amount)).join(Transaction).join(TagTransaction).where((SubTransaction.borrower != self & Transaction.payer == self) & TagTransaction.tag == Tag.id).alias("balance"),
+            SubTransaction.select(peewee.fn.Sum(SubTransaction.amount)).join(Transaction).join(TagTransaction).where((SubTransaction.borrower == self & Transaction.payer != self) & TagTransaction.tag == Tag.id).alias("balance_against")
         ).join(TagUser).where(
             (TagUser.user == self)
         ).group_by(Tag)
 
         if tag:
             query.where(Tag.id == tag)
-
-        logging.info(query)
 
         return query
 

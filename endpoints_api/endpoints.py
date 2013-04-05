@@ -62,6 +62,15 @@ class WhosupApi(remote.Service):
             payer=user
         )
 
+        if hasattr(request, "group") and request.group:
+            logging.info("GROUP FOUND")
+            logging.info(request.group.group.group_id)
+
+            TagTransaction.create(
+                tag=request.group.group.group_id,
+                transaction=transaction
+            )
+
         if hasattr(request, "tags") and len(request.tags) > 0:
             for tag in request.tags:
                 tag = Tag.get_or_create(
@@ -97,10 +106,8 @@ class WhosupApi(remote.Service):
         tag_balances = user.tag_balances()
 
         if tag_balances.count() > 0:
-            logging.info("Wee found tags")
-
             for balance in tag_balances:
-                logging.info(balance.balance)
+                logging.info("%s - %s = %s" % (balance.balance, balance.balance_against, int(balance.balance or 0) - int(balance.balance_against or 0)))
 
             tag_balances = [
                 GroupBalanceResponse(
@@ -110,7 +117,6 @@ class WhosupApi(remote.Service):
                 for balance in tag_balances
             ]
         else:
-            logging.info("Wee, no found tags")
             tag_balances = []
 
         logging.info(tag_balances)

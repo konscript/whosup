@@ -1,5 +1,8 @@
 <form novalidate class="add-form" ng-model="transaction">
     <div class="row padded">
+        <select ng-model="transaction.group" ng-change="changeGroup()" ng-options="group.group.title + ' - balance: ' + group.balance for group in groups">
+          <option value="">-- chose group --</option>
+        </select>
         <input type="hidden" ng-model="transaction.payer" />
         <input type="text" ng-model="transaction.title" placeholder="Give it a name" class="small-6 columns" />
         <input type="number" ng-model="transaction.total_amount" placeholder="How much was it?" class="small-6 columns" ng-change="updateAmounts()" />
