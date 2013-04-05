@@ -1,4 +1,0 @@
-<IfModule mod_rewrite.c>
-   RewriteEngine on
-   RewriteRule !^client/app/ client/app%{REQUEST_URI}
-</IfModule>
