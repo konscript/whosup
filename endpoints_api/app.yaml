@@ -1,4 +1,4 @@
-application: whosup
+application: balancebot-eu
 version: 1
 runtime: python27
 threadsafe: true
@@ -9,13 +9,26 @@ builtins:
 - deferred: on
 - remote_api: on
 
+libraries:
+- name: webob
+  version: latest
+- name: jinja2
+  version: latest
+- name: webapp2
+  version: latest
+
 handlers:
 # Endpoints handler
 - url: /_ah/spi/.*
-  script: endpoints.APPLICATION
+  script: endpoints.API
 
-libraries:
-- name: pycrypto
-  version: "2.6"
-- name: django
-  version: "1.4"
+- url: /static
+  static_dir: static
+  expiration: "7d"
+
+- url: /admin/.*
+  script: main.ADMIN_APPLICATION
+  login: admin
+
+- url: /.*
+  script: main.APPLICATION

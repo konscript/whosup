@@ -2,11 +2,12 @@ import peewee
 import datetime
 import logging
 
-database = peewee.MySQLDatabase('whosup', user='root', passwd='tismando', threadlocals=True)
+database = peewee.MySQLDatabase('balancebot', instance='konscript.com:balancebot:balancebot', threadlocals=True)
 
 
 class User(peewee.Model):
     facebook_id = peewee.IntegerField(unique=True)
+    name = peewee.CharField()
     first_name = peewee.CharField()
     last_name = peewee.CharField()
     join_date = peewee.DateTimeField(default=datetime.datetime.now)

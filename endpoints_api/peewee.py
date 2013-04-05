@@ -58,13 +58,8 @@ try:
 except ImportError:
     psycopg2 = None
 
-try:
-    import MySQLdb as mysql
-except ImportError:
-    try:
-        import pymysql as mysql
-    except ImportError:
-        mysql = None
+from google.appengine.api import rdbms as mysql
+
 
 class ImproperlyConfigured(Exception):
     pass

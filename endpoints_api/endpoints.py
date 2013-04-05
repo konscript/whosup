@@ -1,10 +1,13 @@
 from google.appengine.ext import endpoints
 from protorpc import remote
 from protorpc import message_types
+from webapp2_extras import jinja2
+
+import webapp2
 #import messages as whosup_messages
 
 from messages import FaceBookUserMessage, UserBalanceRequest, GroupBalanceResponse, UserBalanceResponse, TransactionsRequest, TransactionsResponse, TransactionRequest, BalancesRequest, BalancesResponse, BalanceResponse, GroupsResponse, GroupsRequest, GroupRequest, GroupResponse
-from models import User, Transaction, SubTransaction, Tag, TagTransaction, TagUser
+from models import User, Transaction, SubTransaction, Tag, TagTransaction, TagUser, create_tables
 
 import decimal
 import logging
@@ -17,10 +20,10 @@ FACEBOOK_APP_SECRET = "f1318e612bead81dd6808b10974f3379"
 dthandler = lambda obj: int(obj) if isinstance(obj, decimal.Decimal) else obj
 
 
-@endpoints.api(name='whosup', version='v1',
-               description='API for whosup !',
+@endpoints.api(name='balancebot', version='v1',
+               description='API for balancebot !',
                allowed_client_ids=[CLIENT_ID, endpoints.API_EXPLORER_CLIENT_ID])
-class WhosupApi(remote.Service):
+class BalanceBotApi(remote.Service):
     @endpoints.method(UserBalanceRequest,
                       UserBalanceResponse,
                       name='balance',
@@ -138,7 +141,7 @@ class WhosupApi(remote.Service):
             user_balances = [
                 BalanceResponse(
                     payer=request.user,
-                    borrower=FaceBookUserMessage(id=int(balance.facebook_id), first_name=balance.first_name, last_name=balance.last_name),
+                    borrower=FaceBookUserMessage(id=int(balance.facebook_id), first_name=balance.first_name, last_name=balance.last_name, name=balance.name),
                     balance=int(balance.balance or 0) - int(balance.balance_against or 0)
                 )
                 for balance in user_balances
@@ -176,6 +179,7 @@ class WhosupApi(remote.Service):
                 FaceBookUserMessage(
                     first_name=member.first_name,
                     last_name=member.last_name,
+                    name=member.name,
                     id=int(member.facebook_id)
                 )
             )
@@ -209,9 +213,9 @@ def get_or_create_user(user):
     if hasattr(user, "facebook_id") and user.facebook_id != user.id:
         user.id = user.facebook_id
 
-    user = User.get(User.facebook_id == user.id)
-
-    if not user:
+    try:
+        user = User.get(User.facebook_id == user.id)
+    except User.DoesNotExist:
         user = User.create(
             facebook_id=user.id,
             name=user.name or "",
@@ -228,4 +232,4 @@ def get_or_create_user(user):
     return user
 
 
-APPLICATION = endpoints.api_server([WhosupApi], restricted=False)
+API = endpoints.api_server([BalanceBotApi], restricted=False)
