@@ -1,6 +1,6 @@
 
 // Declare app level module which depends on filters, and services
-var app = angular.module('balancebot', ['balancebot.filters', 'balancebot.services', 'balancebot.directives', 'ngResource']).config(['$routeProvider', function($routeProvider) {
+var app = angular.module('balancebot', ['balancebot.filters', 'balancebot.services', 'balancebot.directives', 'devorprod']).config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/balances', {templateUrl: '/static/app/partials/balances.html', controller: BalancesCtrl});
     $routeProvider.when('/group-balances/:id', {templateUrl: '/static/app/partials/group-balances.html', controller: GroupBalancesCtrl});
     $routeProvider.when('/new', {templateUrl: '/static/app/partials/new.html', controller: NewTransactionCtrl});
@@ -10,7 +10,7 @@ var app = angular.module('balancebot', ['balancebot.filters', 'balancebot.servic
     $routeProvider.otherwise({redirectTo: '/balances'});
 }]);
 
-app.run(function($rootScope, $q) {
+app.run(function($rootScope, $q, devOrProd) {
     //Initialize facebook
     FB.init({
         appId      : '191611900970322', // App ID
@@ -50,7 +50,7 @@ app.run(function($rootScope, $q) {
                 endpointsDeferred.resolve("Endpoints loadet");
             }
             $rootScope.$apply();
-        }, 'https://balancebot-eu.appspot.com/_ah/api');
+        }, devOrProd === "dev" ? "http://" + window.location.host + "/_ah/api" : 'https://balancebot-eu.appspot.com/_ah/api');
 
         return endpointsDeferred.promise;
     }

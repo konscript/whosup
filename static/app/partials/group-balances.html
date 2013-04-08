@@ -5,7 +5,7 @@
 <table class="row small-12 columns balances-table">
     <tr ng-repeat="balance in group_balances">
         <td class="title">{{ balance.user.first_name }} {{ balance.user.last_name }}</td>
-        <td class="amount {{ balance.klass }}">{{ balance.balance }}</td>
+        <td class="amount {{ balance.klass }}">{{ balance.balance | centsToDollars | currency:"" }}</td>
     </tr>
 </table>
 <div class="row">

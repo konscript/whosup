@@ -68,4 +68,26 @@ angular.module('balancebot.services', [])
         };
 
         return facebookConnectService;
+}).factory('endpointsBatcher', function($q) {
+    var endpointsBatcher = {};
+
+    var local = true;
+
+    endpointsBatcher.batchMethods = function(methods){
+        var deferred = $q.defer;
+        if(local){
+
+        }else{
+            var rpcBatch = gapi.client.newRpcBatch();
+
+            $.each(methods, function(method){
+                rpcBatch.add(method.name, method.args);
+            });
+
+            rpcBatch.execute(function(){
+                deferred.resolve();
+            });
+        }
+        return deferred.promise;
+    };
 });

@@ -46,6 +46,11 @@
       '/static/app/js/app.js'
     ], function() {
       // when all is done, execute bootstrap angular application
+
+      // Create a new module to determine where to load the api from
+      var devOrProd = angular.module('devorprod', []);
+      devOrProd.value('devOrProd', ("{{ is_development_server }}" === "True") ? "dev" : "prod");
+
       angular.bootstrap(document, ['balancebot']);
     });
   </script>
@@ -54,12 +59,19 @@
   <div role="main">
 
     <header class="row" ng-controller="BalanceCtrl">
-      <a href="#/overview" class="header-logo small-4 columns">
-        <img src="/static/app/img/logo.png" alt="Whos Up" title="Whos Up"/>
-      </a>
-      <a href="#/new" class="button tight small-2 columns"><i class="foundicon-plus"></i>Transaction</a>
-      <a href="#/group/" class="button tight small-2 columns"><i class="foundicon-plus"></i>Group</a>
-      <div class="header-balance small-4 columns {{ '{{ userBalanceClass }}' }}"><small>My Balance:</small><br />{{ '{{ userBalance }}' }}</div>
+      <div class="four columns">
+        <a href="#/overview" class="header-logo small-1 left">
+        <img src="/static/app/img/logo.png" alt="Balances" title="Balances"/>
+        </a>
+        <ul class="top-button-group left small-4">
+          <li><a href="#/new" class="top-button">Transaction</a></li>
+          <li><a href="#/group/" class="top-button">Group</a></li>
+        </ul>
+
+        <div class="header-balance panel right {{ '{{ userBalanceClass }}' }}">{{ '{{ userBalance  | centsToDollars | currency:"" }}' }}</div>
+      </div>
+
+
     </header>
 
     <div ng-view></div>

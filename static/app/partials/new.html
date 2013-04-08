@@ -1,5 +1,6 @@
 <form novalidate class="add-form" ng-model="transaction">
     <div class="row padded">
+        <h5>Create new transaction</h5>
         <select ng-model="transaction.group" ng-change="changeGroup()" ng-options="group.group.title + ' - balance: ' + group.balance for group in groups">
           <option value="">-- chose group --</option>
         </select>

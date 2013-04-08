@@ -1,5 +1,6 @@
 <form novalidate class="add-form" ng-model="group">
     <div class="row padded">
+        <h5>Create new group</h5>
         <input type="hidden" ng-model="group.payer_id" />
         <input type="text" ng-model="group.title" placeholder="Give it a name" class="small-6 columns" value="{{ group.title }}" />
         <input type="text" placeholder="Who should be included?" class="small-12 columns" autocomplete list="availableUsers" />

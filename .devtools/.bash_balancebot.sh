@@ -10,7 +10,7 @@ function balancebot {
 function balancebot! {
     echo -ne "\033]0;KS Server\007"
 	echo "### Starting GAE"
-	/srv/google_appengine/dev_appserver.py --enable_sendmail --log_level=error --port=8080 --host=0.0.0.0 --datastore_path="/srv/balancebot_datastore" /srv/balancebot/ --admin_host 0.0.0.0 --admin_port=8090
+	/srv/google_appengine/dev_appserver.py --enable_sendmail --log_level=error --port=8080 --host=0.0.0.0 /srv/balancebot/ --admin_host 0.0.0.0 --admin_port=8090
 }
 function balancebot_watch {
     echo -ne "\033]0;KS Watch\007"
@@ -23,12 +23,6 @@ alias balancebot_remote_api='python /srv/google_appengine/remote_api_shell.py -s
 ################################
 # IMORT, EXPORT, DEPLOYMENT
 ################################
-
-function after_termination {
-	echo "!!! Ooooooh nooooooes !!!"
-	echo "Process was terminated. This will close after 10 minutes"
-	sleep 360
-}
 
 function balancebot_deploy {
 	trap after_termination EXIT
@@ -192,36 +186,3 @@ function balancebot_compile_javascript {
 	__balance_combine_and_minify_javascript index $MINIFY
 }
 complete -W "disable-minify minify" balancebot_compile_javascript
-
-################################
-# GITHUB
-################################
-
-function balancebot_remove_old_branches {
-
-	cd /srv/balancebot
-
-	# This has to be run from master
-	echo "Checkout master"
-	git checkout master
-
-	# Update our list of remotes
-	git fetch
-	git remote prune origin
-
-	# Remove local fully merged branches
-	git branch --merged master | grep -v 'master$' | xargs git branch -d
-
-	# Show remote fully merged branches
-	echo "The following remote branches are fully merged and will be removed:"
-	git branch -r --merged master | sed 's/ *origin\///' | grep -v 'master$'
-
-	read -p "Continue (y/n)? "
-	if [ "$REPLY" == "y" ]
-	then
-	   # Remove remote fully merged branches
-	   git branch -r --merged master | sed 's/ *origin\///' \
-	             | grep -v 'master$' | xargs -I% git push origin :%
-	   echo "Done!"
-	fi
-}

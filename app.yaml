@@ -17,6 +17,9 @@ libraries:
 - name: webapp2
   version: latest
 
+includes:
+- mysql_settings.yaml
+
 handlers:
 # Endpoints handler
 - url: /_ah/spi/.*
@@ -32,3 +35,6 @@ handlers:
 
 - url: /.*
   script: main.APPLICATION
+
+
+

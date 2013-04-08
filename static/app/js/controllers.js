@@ -15,7 +15,7 @@ function BalanceCtrl($scope, $rootScope){
                 } else {
                     balClass = "amount-minus";
                 }
-                $scope.userBalance = data.result.balance / 100;
+                $scope.userBalance = data.result.balance;
                 $scope.userBalanceClass = balClass;
                 $scope.$apply();
             });
@@ -51,7 +51,7 @@ function BalancesCtrl($scope, $rootScope, facebookConnect) {
             });
 
             rpcBatch.execute(function(){
-                $scope.$apply();
+                 $scope.$apply();
             });
 
             var rpcBatch2 = gapi.client.newRpcBatch();
@@ -77,7 +77,7 @@ function BalancesCtrl($scope, $rootScope, facebookConnect) {
                 $scope.$apply();
             });
         });
-        });
+    });
 }
 
 function GroupBalancesCtrl($scope, $routeParams) {

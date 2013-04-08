@@ -1,8 +1,12 @@
 import peewee
 import datetime
 import logging
+from config import CONFIG
 
-database = peewee.MySQLDatabase('balancebot', instance='konscript.com:balancebot:balancebot', threadlocals=True)
+if CONFIG["is_development_server"]:
+    database = peewee.MySQLDatabase('balancebot', user="root", passwd="tismando", threadlocals=True)
+else:
+    database = peewee.MySQLDatabase('balancebot', instance='konscript.com:balancebot:balancebot', threadlocals=True)
 
 
 class User(peewee.Model):
@@ -70,6 +74,9 @@ class User(peewee.Model):
             query.where(Tag.id == tag)
 
         return query
+
+    def unconfirmed_transactions(self):
+        return SubTransaction.select(SubTransaction).where(SubTransaction.borrower == self & SubTransaction.confirmed is False)
 
 
 class Tag(peewee.Model):

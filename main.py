@@ -83,10 +83,6 @@ class BaseHandler(webapp2.RequestHandler):
         self.session.add_flash(message, level, key='_messages')
 
     @webapp2.cached_property
-    def language(self):
-        return str(Locale.parse(self.locale).language)
-
-    @webapp2.cached_property
     def user(self):
         user = self.auth.get_user_by_session()
         if user:
@@ -97,13 +93,6 @@ class BaseHandler(webapp2.RequestHandler):
     def user_id(self):
         return str(self.user['user_id']) if self.user else None
 
-    @webapp2.cached_property
-    def user_key(self):
-        if self.user:
-            user_info = User.get_by_id(long(self.user_id))
-            return user_info.key
-        return None
-
     def render_template(self, filename, **kwargs):
         kwargs.update({
             'app_name': CONFIG["app_name"],
@@ -111,7 +100,6 @@ class BaseHandler(webapp2.RequestHandler):
             'url': self.request.url,
             'path': self.request.path,
             'query_string': self.request.query_string,
-            'locale': Locale.parse(self.locale),  # babel locale object
         })
 
         self.response.headers.add_header('X-UA-Compatible', 'IE=Edge,chrome=1')
