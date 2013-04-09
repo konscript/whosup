@@ -79,9 +79,6 @@ class BaseHandler(webapp2.RequestHandler):
     def messages(self):
         return self.session.get_flashes(key='_messages')
 
-    def add_message(self, message, level=None):
-        self.session.add_flash(message, level, key='_messages')
-
     @webapp2.cached_property
     def user(self):
         user = self.auth.get_user_by_session()

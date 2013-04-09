@@ -2,11 +2,13 @@ import peewee
 import datetime
 import logging
 from config import CONFIG
+import mysql_config
+
 
 if CONFIG["is_development_server"]:
-    database = peewee.MySQLDatabase('balancebot', user="root", passwd="tismando", threadlocals=True)
+    database = peewee.MySQLDatabase(mysql_config.MYSQL_DATABASE, user=mysql_config.MYSQL_USER, passwd=mysql_config.MYSQL_PASSWORD, threadlocals=True)
 else:
-    database = peewee.MySQLDatabase('balancebot', instance='konscript.com:balancebot:balancebot', threadlocals=True)
+    database = peewee.MySQLDatabase(mysql_config.MYSQL_DATABASE, instance='konscript.com:balancebot:balancebot', threadlocals=True)
 
 
 class User(peewee.Model):

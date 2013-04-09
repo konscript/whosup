@@ -11,14 +11,7 @@ var app = angular.module('balancebot', ['balancebot.filters', 'balancebot.servic
 }]);
 
 app.run(function($rootScope, $q, devOrProd) {
-    //Initialize facebook
-    FB.init({
-        appId      : '191611900970322', // App ID
-        //channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
-        status     : true, // check login status
-        cookie     : true, // enable cookies to allow the server to access the session
-        xfbml      : false  // parse XFBML
-    });
+
 
     //Promise for facebook login
     function facebookPromise(){

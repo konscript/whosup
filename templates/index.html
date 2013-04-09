@@ -45,13 +45,30 @@
       '/static/app/js/directives.js',
       '/static/app/js/app.js'
     ], function() {
-      // when all is done, execute bootstrap angular application
+
+      //Initialize facebook
+      FB.init({
+          appId      : '191611900970322', // App ID
+          //channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : false  // parse XFBML
+      });
 
       // Create a new module to determine where to load the api from
       var devOrProd = angular.module('devorprod', []);
       devOrProd.value('devOrProd', ("{{ is_development_server }}" === "True") ? "dev" : "prod");
 
-      angular.bootstrap(document, ['balancebot']);
+      //Login to facebook
+      FB.login(function(response) {
+        if (response.authResponse) {
+            // when all is done, execute bootstrap angular application
+            angular.bootstrap(document, ['balancebot']);
+        } else {
+            window.location.href = "/login"
+        }
+      }, {scope: 'email, publish_checkins'});
+
     });
   </script>
 </head>
